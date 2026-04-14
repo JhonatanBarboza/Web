@@ -1,13 +1,17 @@
 function goToDashboard() {
-    showScreen('dashboardScreen');
-    updateDashboard();
+    // showScreen('dashboardScreen');
+    // updateDashboard();
+    window.location.href = "../../html/notebook.html";
+
 }
 
 function handleDeleteNote() {
     if (confirm('Tem certeza que deseja excluir esta anotação?')) {
         currentNote = null;
         alert('Anotação excluída com sucesso!');
-        goToDashboard();
+        // goToDashboard();
+        window.location.href = "../../html/notebook.html";
+
     }
 }
 
@@ -20,5 +24,7 @@ function goToQuestions() {
     // Atualizar título das questões
     document.getElementById('questionsTitle').textContent = `Questões sobre ${currentNote.material}`;
 
-    showScreen('questionsScreen');
+    // showScreen('questionsScreen');
+    window.location.href = "../../html/question.html";
+
 }

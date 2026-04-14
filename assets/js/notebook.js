@@ -6,7 +6,8 @@ function goToUpload() {
     // Resetar upload
     resetFileSelection();
 
-    showScreen('uploadScreen');
+    // showScreen('uploadScreen');
+    window.location.href = "../../html/upload.html";
 }
 
 function viewMaterial(materialName) {

@@ -38,8 +38,9 @@ function handleLogin() {
     document.getElementById('loginForm').reset();
 
     // Ir para dashboard
-    showScreen('dashboardScreen');
-    updateDashboard();
+    // showScreen('dashboardScreen');
+    // updateDashboard();
+    window.location.href = "../../html/notebook.html";
 }
 
 function handleSignup() {
