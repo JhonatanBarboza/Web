@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria de Anotações - Caderno+</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/gallery.css">
+</head>
+<body>
+    <!-- Tela de Galeria de Anotações -->
+    <div id="notesGalleryScreen" class="screen">
+        <div class="notes-gallery-container">
+            <!-- Header -->
+            <header class="notes-gallery-header">
+                <button class="btn btn-back" onclick="goToDashboard()">← Voltar</button>
+                <h1 id="galleryTitle">Anotações de Matemática</h1>
+            </header>
+
+            <!-- Main Content -->
+            <main class="notes-gallery-main">
+                <div class="notes-gallery-content">
+                    <!-- Grid de Anotações (miniaturas) -->
+                    <div class="notes-grid" id="notesGrid">
+                        <!-- Miniaturas serão adicionadas dinamicamente aqui -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/js/gallery.js"></script>
+</body>
+</html>

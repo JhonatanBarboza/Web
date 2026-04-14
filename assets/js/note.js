@@ -1,7 +1,7 @@
 function goToDashboard() {
     // showScreen('dashboardScreen');
     // updateDashboard();
-    window.location.href = "../../html/notebook.html";
+    window.location.href = "../html/notebook.html";
 
 }
 
@@ -10,7 +10,7 @@ function handleDeleteNote() {
         currentNote = null;
         alert('Anotação excluída com sucesso!');
         // goToDashboard();
-        window.location.href = "../../html/notebook.html";
+        window.location.href = "../html/notebook.html";
 
     }
 }
@@ -25,6 +25,6 @@ function goToQuestions() {
     document.getElementById('questionsTitle').textContent = `Questões sobre ${currentNote.material}`;
 
     // showScreen('questionsScreen');
-    window.location.href = "../../html/question.html";
+    window.location.href = "../html/question.html";
 
 }

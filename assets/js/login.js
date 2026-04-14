@@ -40,7 +40,7 @@ function handleLogin() {
     // Ir para dashboard
     // showScreen('dashboardScreen');
     // updateDashboard();
-    window.location.href = "../../html/notebook.html";
+    window.location.href = "../html/notebook.html";
 }
 
 function handleSignup() {

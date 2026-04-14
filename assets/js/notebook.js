@@ -7,12 +7,12 @@ function goToUpload() {
     resetFileSelection();
 
     // showScreen('uploadScreen');
-    window.location.href = "../../html/upload.html";
+    window.location.href = "../html/upload.html";
 }
 
 function viewMaterial(materialName) {
     currentMaterial = materialName;
-    alert(`Abrindo anotações de ${materialName}. (Funcionalidade para Parte 2)`);
+    openGallery(materialName);
 }
 
 function showAddMaterialModal() {

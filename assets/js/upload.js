@@ -1,6 +1,15 @@
 function goToDashboard() {
-    showScreen('dashboardScreen');
-    updateDashboard();
+    // Obter o material da URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const material = urlParams.get('material');
+    
+    if (material) {
+        // Se veio de uma galeria, voltar para a galeria
+        window.location.href = "../html/gallery.html?material=" + encodeURIComponent(material);
+    } else {
+        // Senão, voltar para o dashboard principal
+        window.location.href = "../html/notebook.html";
+    }
 }
 
 function handleFileSelect(event) {

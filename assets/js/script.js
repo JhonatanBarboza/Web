@@ -106,13 +106,18 @@ function handleLogout() {
         currentNote = null;
         uploadedFile = null;
 
-        // Limpar formulários
-        document.getElementById('loginForm').reset();
-        document.getElementById('signupForm').reset();
+        // Limpar localStorage
+        localStorage.clear();
 
-        // Voltar para login
-        showScreen('loginScreen');
-        switchTab('login');
+        // Verificar se estamos na página de notebook ou em outra página
+        if (document.getElementById('loginScreen')) {
+            // Se estamos na página de login/signup, mostrar a tela de login
+            showScreen('loginScreen');
+            switchTab('login');
+        } else {
+            // Se estamos em outra página (notebook.html, gallery.html, etc), redirecionar para login
+            window.location.href = "../html/login.html";
+        }
     }
 }
 
