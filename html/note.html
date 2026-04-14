@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - Caderno+</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/note.css">
+</head>
+<body>
+
+    <!-- Tela de Visualização da Anotação -->
+    <div id="noteScreen" class="screen">
+        <div class="note-container">
+            <!-- Header -->
+            <header class="note-header">
+                <button class="btn btn-back" onclick="goToDashboard()">← Voltar</button>
+                <div class="note-header-actions">
+                    <button class="btn btn-icon" title="Editar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></button>
+                    <button class="btn btn-icon dangerous" onclick="handleDeleteNote()" title="Excluir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg></button>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <main class="note-main">
+                <div class="note-content">
+                    <!-- Título e Badge -->
+                    <div class="note-title-section">
+                        <h1 id="noteTitle" class="note-title">Derivadas — 12/04</h1>
+                        <span id="noteMaterialBadge" class="material-badge" style="background-color: #667eea;">Matemática</span>
+                    </div>
+
+                    <!-- Imagem Original -->
+                    <div class="note-image-section">
+                        <img id="noteImage" src="https://via.placeholder.com/600x400?text=Lousa+Fotografada" alt="Imagem da anotação" class="note-image">
+                    </div>
+
+                    <!-- Texto Transcrito -->
+                    <div class="note-text-section">
+                        <h2>Conteúdo Transcrito</h2>
+                        <div id="noteContent" class="note-text-content">
+                            <h3>Conceito de Derivada</h3>
+                            <p>A derivada de uma função f(x) em um ponto x₀ é definida como o limite:</p>
+                            <p style="text-align: center; font-family: 'Courier New', monospace;">f'(x₀) = lim(h→0) [f(x₀+h) - f(x₀)] / h</p>
+                            <h3>Propriedades das Derivadas</h3>
+                            <ul>
+                                <li><strong>Regra da Potência:</strong> d/dx(xⁿ) = n·xⁿ⁻¹</li>
+                                <li><strong>Regra do Produto:</strong> (f·g)' = f'·g + f·g'</li>
+                                <li><strong>Regra da Cadeia:</strong> (f∘g)' = f'(g)·g'</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Ações Principais -->
+                    <div class="note-actions">
+                        <button class="btn btn-action" onclick="goToQuestions()">
+                            <span class="action-icon">❓</span>
+                            <span>Gerar Questões</span>
+                        </button>
+                        <button class="btn btn-action">
+                            <span class="action-icon">📋</span>
+                            <span>Ver Resumo</span>
+                        </button>
+                        <button class="btn btn-action">
+                            <span class="action-icon">💡</span>
+                            <span>Explicação</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/note.js"></script>
+</body>
+</html>

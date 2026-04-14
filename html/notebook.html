@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notebooks - Caderno+</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/notebook.css">
+</head>
+<body>
+
+    <!-- Tela de Dashboard de Materiais -->
+    <div id="dashboardScreen" class="screen">
+        <div class="dashboard-container">
+            <!-- Header -->
+            <header class="dashboard-header">
+                <div class="user-section">
+                    <h2>Bem-vindo, <span id="userName">Ana</span>!</h2>
+                </div>
+                <button class="btn btn-logout" onclick="handleLogout()">Sair</button>
+            </header>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="dashboard-top-actions">
+                    <h1>Meus Cadernos</h1>
+                    <button class="btn btn-primary" onclick="goToUpload()">+ Nova Anotação</button>
+                </div>
+
+                <!-- Grid de Materiais -->
+                <div class="materials-grid">
+                    <!-- Card Matemática -->
+                    <div class="material-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="material-card-header">
+                            <h3>Matemática</h3>
+                            <span class="material-count">12 anotações</span>
+                        </div>
+                        <button class="btn btn-small" onclick="viewMaterial('Matemática')">Acessar</button>
+                    </div>
+
+                    <!-- Card Física -->
+                    <div class="material-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="material-card-header">
+                            <h3>Física</h3>
+                            <span class="material-count">8 anotações</span>
+                        </div>
+                        <button class="btn btn-small" onclick="viewMaterial('Física')">Acessar</button>
+                    </div>
+
+                    <!-- Card Química -->
+                    <div class="material-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="material-card-header">
+                            <h3>Química</h3>
+                            <span class="material-count">6 anotações</span>
+                        </div>
+                        <button class="btn btn-small" onclick="viewMaterial('Química')">Acessar</button>
+                    </div>
+
+                    <!-- Card Biologia -->
+                    <div class="material-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <div class="material-card-header">
+                            <h3>Biologia</h3>
+                            <span class="material-count">10 anotações</span>
+                        </div>
+                        <button class="btn btn-small" onclick="viewMaterial('Biologia')">Acessar</button>
+                    </div>
+
+                    <!-- Card Adicionar Nova Matéria -->
+                    <div class="material-card material-card-add" onclick="showAddMaterialModal()">
+                        <div class="material-add-content">
+                            <span class="add-icon">+</span>
+                            <p>Nova Matéria</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/notebook.js"></script>
+</body>
+</html>
