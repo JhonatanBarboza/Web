@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload - Caderno+</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/upload.css">
+</head>
+<body>
+
+    <!-- Tela de Upload e Nova Anotação -->
+    <div id="uploadScreen" class="">
+        <div class="">
+            <!-- Header -->
+            <header class="upload-header">
+                <button class="btn btn-back" onclick="goToDashboard()">← Voltar</button>
+                <h1>Nova Anotação</h1>
+            </header>
+
+            <!-- Main Content -->
+            <main class="upload-main">
+                <div class="upload-content">
+                    <!-- Drop Zone -->
+                    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                        <div class="drop-zone-content">
+                            <svg class="camera-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                                <circle cx="12" cy="13" r="4"></circle>
+                            </svg>
+                            <p class="drop-zone-text">Arraste a imagem aqui ou clique para selecionar</p>
+                            <span class="drop-zone-hint">Formatos aceitos: JPG, PNG, PDF</span>
+                        </div>
+                        <input type="file" id="fileInput" style="display: none;" accept="image/*,application/pdf" onchange="handleFileSelect(event)">
+                    </div>
+
+                    <!-- Preview da Imagem -->
+                    <div id="previewSection" class="preview-section" style="display: none;">
+                        <h3>Prévia do Arquivo</h3>
+                        <img id="previewImage" class="preview-image" alt="Prévia da imagem">
+                        <button class="btn btn-secondary" onclick="resetFileSelection()">Selecionar Outro Arquivo</button>
+                    </div>
+
+                    <!-- Formulário de Informações -->
+                    <div class="form-section">
+                        <div class="form-group">
+                            <label for="noteMaterial">Matéria</label>
+                            <select id="noteMaterial" class="form-select">
+                                <option value="">Selecione uma matéria</option>
+                                <option value="Matemática">Matemática</option>
+                                <option value="Física">Física</option>
+                                <option value="Química">Química</option>
+                                <option value="Biologia">Biologia</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="noteDate">Data</label>
+                            <input type="date" id="noteDate" class="form-input">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="noteTitle">Título da Anotação (opcional)</label>
+                            <input type="text" id="noteTitle" placeholder="Ex: Derivadas - Aula 5" class="form-input">
+                        </div>
+                    </div>
+
+                    <!-- Botão de Transcrição -->
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-large" onclick="handleTranscribe()">
+                            <span>🤖 Transcrever com IA</span>
+                        </button>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="../assets/js/script.js"></script>
+    <script src="../assets/js/upload.js"></script>
+</body>
+</html>
