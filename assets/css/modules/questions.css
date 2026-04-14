@@ -1,0 +1,178 @@
+/* ==================== QUESTIONS CONTAINER ==================== */
+.questions-container {
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+/* ==================== QUESTIONS HEADER ==================== */
+.questions-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.questions-header h1 {
+    flex: 1;
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+/* ==================== QUESTIONS MAIN ==================== */
+.questions-main {
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.questions-content {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==================== PROGRESS SECTION ==================== */
+.progress-section {
+    margin-bottom: 2rem;
+}
+
+.progress-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: var(--border-color);
+    border-radius: 50px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* ==================== QUESTIONS LIST ==================== */
+.questions-list {
+    margin-bottom: 2rem;
+}
+
+/* ==================== QUESTION CARD ==================== */
+.question-card {
+    background-color: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.question-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.question-number {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.question-text {
+    font-size: 1rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.question-card.answered-correct {
+    border-left: 4px solid var(--success-color);
+}
+
+.question-card.answered-wrong {
+    border-left: 4px solid var(--danger-color);
+}
+
+/* ==================== QUESTION OPTIONS ==================== */
+.question-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.option:hover {
+    background-color: rgba(102, 126, 234, 0.05);
+}
+
+.option input[type="radio"] {
+    margin-top: 0.25rem;
+    cursor: pointer;
+}
+
+.option-letter {
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 2rem;
+}
+
+.option-text {
+    flex: 1;
+    color: var(--text-primary);
+}
+
+.option-result {
+    color: var(--success-color);
+    font-weight: 600;
+    margin-left: auto;
+}
+
+.option.selected {
+    background-color: rgba(102, 126, 234, 0.1);
+    border-radius: 0.5rem;
+}
+
+/* ==================== QUESTIONS ACTIONS ==================== */
+.questions-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 768px) {
+    .questions-main {
+        padding: 1rem;
+    }
+
+    .questions-content {
+        padding: 1.5rem;
+    }
+
+    .question-card {
+        padding: 1rem;
+    }
+}

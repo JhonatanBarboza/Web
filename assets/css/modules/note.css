@@ -1,0 +1,138 @@
+/* ==================== NOTE CONTAINER ==================== */
+.note-container {
+    min-height: 100vh;
+    background-color: var(--background);
+}
+
+/* ==================== NOTE HEADER ==================== */
+.note-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.note-header-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ==================== NOTE MAIN ==================== */
+.note-main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.note-content {
+    background: white;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ==================== NOTE TITLE SECTION ==================== */
+.note-title-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.note-title {
+    font-size: 2rem;
+    color: var(--text-primary);
+}
+
+.material-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* ==================== NOTE IMAGE SECTION ==================== */
+.note-image-section {
+    margin-bottom: 2rem;
+}
+
+.note-image {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+}
+
+/* ==================== NOTE TEXT SECTION ==================== */
+.note-text-section {
+    margin-bottom: 2rem;
+}
+
+.note-text-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.note-text-content {
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.note-text-content h3 {
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.note-text-content p {
+    margin-bottom: 0.8rem;
+}
+
+.note-text-content ul {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.note-text-content li {
+    margin-bottom: 0.5rem;
+}
+
+/* ==================== NOTE ACTIONS ==================== */
+.note-actions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+/* ==================== RESPONSIVO ==================== */
+@media (max-width: 768px) {
+    .note-header {
+        flex-wrap: wrap;
+    }
+
+    .note-main {
+        padding: 1rem;
+    }
+
+    .note-content {
+        padding: 1.5rem;
+    }
+
+    .note-title {
+        font-size: 1.5rem;
+    }
+
+    .note-actions {
+        grid-template-columns: 1fr;
+    }
+}
