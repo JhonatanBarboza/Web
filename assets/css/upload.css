@@ -8,7 +8,7 @@
 .upload-header {
     background-color: var(--surface);
     padding: 1rem 2rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -35,7 +35,7 @@
 
 .drop-zone {
     border: 2px dashed var(--primary-color);
-    border-radius: 1rem;
+    border-radius: var(--border-rd);
     padding: 3rem 2rem;
     text-align: center;
     cursor: pointer;
@@ -79,16 +79,16 @@
 .preview-image {
     max-width: 100%;
     max-height: 300px;
-    border-radius: 0.5rem;
+    border-radius: var(--border-rd);
     margin-bottom: 1rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow);
 }
 
 .form-section {
     background-color: var(--surface);
     padding: 1.5rem;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-sm);
+    border-radius: var(--border-rd);
+    box-shadow: var(--shadow);
 }
 
 #noteDate {

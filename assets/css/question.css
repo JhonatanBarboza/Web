@@ -8,7 +8,7 @@
 .questions-header {
     background-color: var(--surface);
     padding: 1rem 2rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -29,9 +29,9 @@
 
 .questions-content {
     background-color: var(--surface);
-    border-radius: 1rem;
+    border-radius: var(--border-rd);
     padding: 2rem;
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow);
 }
 
 .progress-section {
@@ -49,14 +49,14 @@
     width: 100%;
     height: 8px;
     background-color: var(--border-color);
-    border-radius: 10px;
+    border-radius: var(--border-rd);
     overflow: hidden;
     margin-bottom: 0.5rem;
 }
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    background: var(--primary-color);
     transition: width 0.3s ease;
 }
 
@@ -75,7 +75,7 @@
 .question-card {
     background-color: var(--background);
     border: 2px solid var(--border-color);
-    border-radius: 1rem;
+    border-radius: var(--border-rd);
     padding: 1.5rem;
     transition: all 0.3s ease;
 }
@@ -99,7 +99,7 @@
     background-color: var(--primary-color);
     color: white;
     padding: 0.25rem 0.75rem;
-    border-radius: 1rem;
+    border-radius: var(--border-rd);
     font-size: 0.85rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
@@ -122,7 +122,7 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.75rem;
-    border-radius: 0.5rem;
+    border-radius: var(--border-rd);
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: white;

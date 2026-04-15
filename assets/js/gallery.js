@@ -10,7 +10,7 @@ const notesData = {
             date: '12/04/2026',
             description: 'Conceitos fundamentais sobre derivadas e suas aplicações',
             material: 'Matemática',
-            color: '#667eea'
+            color: 'var(--secondary-color)'
         },
         {
             id: 2,
@@ -18,7 +18,7 @@ const notesData = {
             date: '10/04/2026',
             description: 'Integração e cálculo de áreas sob curvas',
             material: 'Matemática',
-            color: '#667eea'
+            color: 'var(--secondary-color)'
         },
         {
             id: 3,
@@ -26,7 +26,7 @@ const notesData = {
             date: '08/04/2026',
             description: 'Resolução de equações diferenciais ordinárias',
             material: 'Matemática',
-            color: '#667eea'
+            color: 'var(--secondary-color)'
         }
     ],
     'Física': [
@@ -36,7 +36,7 @@ const notesData = {
             date: '11/04/2026',
             description: 'Fenômenos ópticos e propagação da luz',
             material: 'Física',
-            color: '#f093fb'
+            color: 'var(--secondary-color)'
         },
         {
             id: 5,
@@ -44,7 +44,7 @@ const notesData = {
             date: '09/04/2026',
             description: 'Leis da termodinâmica e transformações de energia',
             material: 'Física',
-            color: '#f093fb'
+            color: 'var(--secondary-color)'
         }
     ],
     'Química': [
@@ -54,7 +54,7 @@ const notesData = {
             date: '07/04/2026',
             description: 'Cálculos estequiométricos e proporções químicas',
             material: 'Química',
-            color: '#61dafb'
+            color: 'var(--secondary-color)'
         }
     ],
     'Português': [
@@ -64,7 +64,7 @@ const notesData = {
             date: '06/04/2026',
             description: 'Análise sintática e estrutura das orações',
             material: 'Português',
-            color: '#f5576c'
+            color: 'var(--secondary-color)'
         }
     ],
     'História': [
@@ -74,7 +74,7 @@ const notesData = {
             date: '05/04/2026',
             description: 'Contexto histórico e consequências da Revolução Francesa',
             material: 'História',
-            color: '#ff6b6b'
+            color: 'var(--secondary-color)'
         }
     ]
 };
@@ -174,7 +174,7 @@ function createNoteCard(note) {
     card.style.flexDirection = 'column';
     
     const html = `
-        <div class="note-thumbnail-image" style="background: linear-gradient(135deg, ${note.color} 0%, ${shadeColor(note.color, -20)} 100%); flex-shrink: 0; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center;">
+        <div class="note-thumbnail-image" style="background: var(--primary-color); flex-shrink: 0; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center;">
             <img src="${note.image}" alt="${note.title}" onerror="this.style.display='none'" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
         <div class="note-thumbnail-content" style="padding: 1.25rem; flex: 1; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden;">
