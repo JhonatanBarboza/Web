@@ -101,7 +101,24 @@ function showScreen(screenId) {
 // }
 
 function handleLogout() {
-    if (confirm('Tem certeza que deseja sair?')) {
+    const overlay = document.createElement("div");
+    overlay.className = "overlay";
+
+    overlay.innerHTML = `
+    <div class="popup">
+        <button class="btn-fechar"> X </button>
+        <p>Tem certeza que deseja sair?</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button class="btn" id="btn-sairconfirma" style="flex: 1; color: white;background-color: var(--danger-color);">Sim</button>
+            <button class="btn" id="btn-naosair" style="flex: 1;">Não</button>   
+        </div>
+    </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // confirmar
+    overlay.querySelector("#btn-sairconfirma").onclick = () => {
         currentUser = null;
         currentNote = null;
         uploadedFile = null;
@@ -119,6 +136,9 @@ function handleLogout() {
             window.location.href = "../html/login.html";
         }
     }
+
+    overlay.querySelector(".btn-fechar").onclick = () => overlay.remove();
+    overlay.querySelector("#btn-naosair").onclick = () => overlay.remove();
 }
 
 // ==================== DASHBOARD ====================

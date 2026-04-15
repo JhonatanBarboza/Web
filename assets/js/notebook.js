@@ -23,7 +23,7 @@ function showAddMaterialModal() {
 
     overlay.innerHTML = `
     <div class="popup">
-        <button id="btn-fecharAddMateria"> X </button>
+        <button class="btn-fechar"> X </button>
         <div class="form-group">
             <label for="newMateriaNome">Nome da Matéria</label>
             <input class="form-input" type="text" id="newMateriaNome" placeholder="Ex: História" required>
@@ -35,7 +35,7 @@ function showAddMaterialModal() {
     document.body.appendChild(overlay);
 
     // fechar
-    overlay.querySelector("#btn-fecharAddMateria").onclick = () => overlay.remove();
+    overlay.querySelector(".btn-fechar").onclick = () => overlay.remove();
 
     // confirmar
     overlay.querySelector("#btn-confirmAddMateria").onclick = () => {

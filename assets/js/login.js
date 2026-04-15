@@ -21,8 +21,18 @@ function handleLogin() {
     const email = document.getElementById('loginEmail').value.trim();
     const password = document.getElementById('loginPassword').value.trim();
 
+    const formLogin = document.getElementById('loginForm');
+    const errorText = document.createElement('p');
+    errorText.style.color = 'red';
+    errorText.style.marginTop = '10px';
+    errorText.style.marginBottom = '10px';
+
+
     if (!email || !password) {
-        alert('Por favor, preencha todos os campos!');
+        errorText.textContent = 'Por favor, preencha todos os campos!';
+        if(!formLogin.querySelector('p')){
+        formLogin.insertBefore(errorText, formLogin.lastElementChild);
+        }
         return;
     }
 
@@ -49,18 +59,36 @@ function handleSignup() {
     const password = document.getElementById('signupPassword').value.trim();
     const confirm = document.getElementById('signupConfirm').value.trim();
 
+    const formSingUp = document.getElementById('signupForm');
+    const errorText = document.createElement('p');
+    errorText.style.color = 'red';
+    errorText.style.marginTop = '10px';
+    errorText.style.marginBottom = '10px';
+
     if (!name || !email || !password || !confirm) {
-        alert('Por favor, preencha todos os campos!');
+        errorText.textContent = 'Por favor, preencha todos os campos!';
+        if(formSingUp.querySelector('p')){
+            formSingUp.querySelector('p').remove();
+        }
+        formSingUp.insertBefore(errorText, formSingUp.lastElementChild);
         return;
     }
 
     if (password !== confirm) {
-        alert('As senhas não coincidem!');
+        errorText.textContent = 'As senhas não coincidem!';
+        if(formSingUp.querySelector('p')){
+            formSingUp.querySelector('p').remove();
+        }
+        formSingUp.insertBefore(errorText, formSingUp.lastElementChild);
         return;
     }
 
     if (password.length < 6) {
-        alert('A senha deve ter no mínimo 6 caracteres!');
+        errorText.textContent = 'A senha deve ter no mínimo 6 caracteres!';
+        if(formSingUp.querySelector('p')){
+            formSingUp.querySelector('p').remove();
+        }
+        formSingUp.insertBefore(errorText, formSingUp.lastElementChild);
         return;
     }
 
@@ -75,7 +103,13 @@ function handleSignup() {
     // Limpar formulário
     document.getElementById('signupForm').reset();
 
-    // Voltar para aba de login
-    switchTab('login');
-    alert('Conta criada com sucesso! Você já pode fazer login.');
+    successText = document.createElement('p');
+    successText.style.color = 'green';
+    successText.style.marginTop = '10px';
+    successText.style.marginBottom = '10px';
+    successText.textContent = 'Conta criada com sucesso! Você já pode fazer login.';
+    if(formSingUp.querySelector('p')){
+        formSingUp.querySelector('p').remove();
+    }
+    formSingUp.insertBefore(successText, formSingUp.lastElementChild);
 }
