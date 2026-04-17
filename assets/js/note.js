@@ -20,13 +20,13 @@ function handleDeleteNote() {
 }
 
 function goToQuestions() {
-    if (!currentNote) {
-        alert('Nenhuma anotação selecionada!');
-        return;
-    }
+    // if (!currentNote) {
+    //     alert('Nenhuma anotação selecionada!');
+    //     return;
+    // }
 
     // Atualizar título das questões
-    document.getElementById('questionsTitle').textContent = `Questões sobre ${currentNote.material}`;
+    // document.getElementById('questionsTitle').textContent = `Questões sobre ${currentNote.material}`;
 
     // showScreen('questionsScreen');
     window.location.href = "../html/question.html";

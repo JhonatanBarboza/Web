@@ -1,5 +1,5 @@
 function goToNote() {
-    showNote();
+    window.location.href = "../html/note.html?noteId=1&material=Matemática";
 }
 
 function answerQuestion(questionNumber, answer) {
