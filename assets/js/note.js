@@ -6,8 +6,14 @@ function backToGallery() {
 }
 
 function handleDeleteNote() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const noteId = urlParams.get('noteId');
+
+    if (!noteId) {
+        alert('Nenhuma anotação selecionada!');
+        return;
+    }
     if (confirm('Tem certeza que deseja excluir esta anotação?')) {
-        currentNote = null;
         alert('Anotação excluída com sucesso!');
         backToGallery();
     }

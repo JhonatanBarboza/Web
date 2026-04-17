@@ -82,7 +82,7 @@ function initGallery() {
     const urlParams = new URLSearchParams(window.location.search);
     const material = urlParams.get('material');
     
-    if (!material || !notesData[material]) {
+    if (!material) {
         window.location.href = "../html/notebook.html";
         return;
     }

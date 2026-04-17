@@ -47,7 +47,7 @@ function showAddMaterialModal() {
                 <h3>${newMateriaNome}</h3>
                 <span class="material-count">0 anotações</span>
             </div>
-            <button class="btn btn-small" onclick="viewMaterial('${newMateriaNome}')">Acessar</button>
+            <button class="btn btn-small" onclick="goToGallery('${newMateriaNome}')">Acessar</button>
             `
             div_materias.insertBefore(nova_div, document.getElementsByClassName("material-card-add")[0]);
 
