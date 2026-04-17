@@ -63,5 +63,6 @@ function createNote(newNote){
     // voltar para a galeria, madando informações da nova nota (simulação)
     localStorage.setItem('selectedNoteId', newNote.id);
     localStorage.setItem('currentMaterial', newNote.material);
-    window.location.href = "../html/gallery.html?&material=" + encodeURIComponent(newNote.material) + "&title=" + encodeURIComponent(newNote.title) + "&content=" + encodeURIComponent(newNote.content) + "&new=true";
+    const imageParam = newNote.image ? "&image=" + encodeURIComponent(newNote.image) : "";
+    window.location.href = "../html/gallery.html?&material=" + encodeURIComponent(newNote.material) + "&title=" + encodeURIComponent(newNote.title) + "&content=" + encodeURIComponent(newNote.content) + imageParam + "&new=true";
 }

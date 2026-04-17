@@ -50,6 +50,11 @@ function showAddMaterialModal() {
             <button class="btn btn-small" onclick="goToGallery('${newMateriaNome}')">Acessar</button>
             `
             div_materias.insertBefore(nova_div, document.getElementsByClassName("material-card-add")[0]);
+            
+            // Adicionar a nova matéria ao notesData se ela existir
+            if (typeof notesData !== 'undefined' && !notesData[newMateriaNome]) {
+                notesData[newMateriaNome] = [];
+            }
 
             // fechar popup
             overlay.remove();

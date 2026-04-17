@@ -89,6 +89,11 @@ function initGallery() {
     
     currentGalleryMaterial = material;
     
+    // Criar matéria em notesData se não existir
+    if (!notesData[currentGalleryMaterial]) {
+        notesData[currentGalleryMaterial] = [];
+    }
+    
     // Atualizar título da galeria
     const galleryTitle = document.getElementById('galleryTitle');
     
@@ -101,12 +106,15 @@ function initGallery() {
     if(isNew){
         // alert('Anotação criada com sucesso!');
         // adicionar a nova nota à galeria (simulação)
+        const noteId = urlParams.get('noteId') || Date.now();
         const newNote = {
-            id: urlParams.get('noteId'),
+            id: noteId,
             title: urlParams.get('title'),
             material: urlParams.get('material'),
             date: new Date().toLocaleDateString('pt-BR'),
             description: 'Anotação gerada a partir da imagem enviada',
+            image: urlParams.get('image') || '',
+            content: decodeURIComponent(urlParams.get('content') || ''),
             color: 'var(--secondary-color)'
         };
         notesData[currentGalleryMaterial].unshift(newNote);
@@ -224,5 +232,8 @@ function formatDate(dateStr) {
 
 // Inicializa a galeria quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    initGallery();
+    // Só executar inicialização se estamos na página de galeria
+    if (document.getElementById('notesGrid')) {
+        initGallery();
+    }
 });
