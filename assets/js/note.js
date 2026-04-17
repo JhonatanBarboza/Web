@@ -19,6 +19,18 @@ function handleDeleteNote() {
     }
 }
 
+function goToNewNote() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const material = urlParams.get('material');
+
+    if (!material) {
+        alert('Matéria não identificada!');
+        return;
+    }
+
+    window.location.href = "../html/upload.html?material=" + encodeURIComponent(material);
+}
+
 function goToQuestions() {
     // if (!currentNote) {
     //     alert('Nenhuma anotação selecionada!');
