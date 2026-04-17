@@ -107,7 +107,6 @@ function initGallery() {
             material: urlParams.get('material'),
             date: new Date().toLocaleDateString('pt-BR'),
             description: 'Anotação gerada a partir da imagem enviada',
-            image: urlParams.get('content') ? 'data:image/png;base64,' + urlParams.get('content') : '',
             color: 'var(--secondary-color)'
         };
         notesData[currentGalleryMaterial].unshift(newNote);
