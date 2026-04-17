@@ -1,17 +1,15 @@
-function goToDashboard() {
-    // showScreen('dashboardScreen');
-    // updateDashboard();
-    window.location.href = "../html/notebook.html";
+function backToGallery() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const material = urlParams.get('material');
 
+    window.location.href = "../html/gallery.html?material=" + encodeURIComponent(material);
 }
 
 function handleDeleteNote() {
     if (confirm('Tem certeza que deseja excluir esta anotação?')) {
         currentNote = null;
         alert('Anotação excluída com sucesso!');
-        // goToDashboard();
-        window.location.href = "../html/notebook.html";
-
+        backToGallery();
     }
 }
 

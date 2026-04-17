@@ -10,11 +10,6 @@ function goToUpload() {
     window.location.href = "../html/upload.html";
 }
 
-function viewMaterial(materialName) {
-    currentMaterial = materialName;
-    openGallery(materialName);
-}
-
 function showAddMaterialModal() {
     // const newMateriaNome = prompt('Digite o nome da nova matéria:');
 

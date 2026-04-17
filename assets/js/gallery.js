@@ -1,7 +1,5 @@
-// Variable to store the current material being viewed
 let currentGalleryMaterial = '';
 
-// Sample data structure for notes (in a real app, this would come from a database)
 const notesData = {
     'Matemática': [
         {
@@ -79,30 +77,44 @@ const notesData = {
     ]
 };
 
-function openGallery(materialName) {
-    // Usar URL parameter em vez de localStorage
-    window.location.href = "../html/gallery.html?material=" + encodeURIComponent(materialName);
-}
-
 function initGallery() {
-    // Get material from URL parameter
+    // Obter o material a partir da URL
     const urlParams = new URLSearchParams(window.location.search);
     const material = urlParams.get('material');
     
-    if (!material) {
+    if (!material || !notesData[material]) {
+        window.location.href = "../html/notebook.html";
         return;
     }
     
     currentGalleryMaterial = material;
     
-    // Update gallery title
+    // Atualizar título da galeria
     const galleryTitle = document.getElementById('galleryTitle');
     
     if (galleryTitle) {
         galleryTitle.textContent = `Anotações de ${currentGalleryMaterial}`;
     }
-    
-    // Load notes for the material
+
+    // verificar se é uma nova nota (simulação de criação)
+    const isNew = urlParams.get('new');
+    if(isNew){
+        // alert('Anotação criada com sucesso!');
+        // adicionar a nova nota à galeria (simulação)
+        const newNote = {
+            id: urlParams.get('noteId'),
+            title: urlParams.get('title'),
+            material: urlParams.get('material'),
+            date: new Date().toLocaleDateString('pt-BR'),
+            description: 'Anotação gerada a partir da imagem enviada',
+            image: urlParams.get('content') ? 'data:image/png;base64,' + urlParams.get('content') : '',
+            color: 'var(--secondary-color)'
+        };
+        notesData[currentGalleryMaterial].unshift(newNote);
+    }
+    // atualizar a URL para remover os parâmetros de nova nota (evitar alertas repetidos ao recarregar)
+    window.history.replaceState({}, document.title, window.location.pathname + '?material=' + encodeURIComponent(currentGalleryMaterial));
+
     loadNotesForMaterial(currentGalleryMaterial);
 }
 
@@ -141,7 +153,7 @@ function createNewNoteButton(materialName) {
     
     const button = document.createElement('div');
     button.className = 'new-note-button';
-    button.onclick = () => createNewNote(materialName);
+    button.onclick = () => goToUpload(materialName);
     
     button.innerHTML = `
         <div class="new-note-button-icon">+</div>
@@ -151,10 +163,10 @@ function createNewNoteButton(materialName) {
     return button;
 }
 
-function createNewNote(materialName) {
-    // Redirecionar para upload.html ou criar nova nota
-    // Por enquanto, redireciona para upload.html com o material como parâmetro
-    window.location.href = "../html/upload.html?material=" + encodeURIComponent(materialName);
+function goToUpload() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const material = urlParams.get('material');
+    window.location.href = "../html/upload.html?material=" + encodeURIComponent(material);
 }
 
 function createNoteCard(note) {
@@ -173,7 +185,7 @@ function createNoteCard(note) {
     card.style.display = 'flex';
     card.style.flexDirection = 'column';
     
-    const html = `
+    card.innerHTML = `
         <div class="note-thumbnail-image" style="background: var(--primary-color); flex-shrink: 0; width: 100%; height: 150px; display: flex; align-items: center; justify-content: center;">
             <img src="${note.image}" alt="${note.title}" onerror="this.style.display='none'" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
@@ -187,12 +199,11 @@ function createNoteCard(note) {
         </div>
     `;
     
-    card.innerHTML = html;    
     return card;
 }
 
 function viewNote(noteId) {
-    // Store the note ID and material for the note.html page
+    // Salvar o ID da nota selecionada e redirecionar para a página de visualização
     localStorage.setItem('selectedNoteId', noteId);
     localStorage.setItem('currentMaterial', currentGalleryMaterial);
     window.location.href = "../html/note.html?noteId=" + noteId + "&material=" + encodeURIComponent(currentGalleryMaterial);
@@ -212,18 +223,7 @@ function formatDate(dateStr) {
     }
 }
 
-// Helper function to shade colors
-function shadeColor(color, percent) {
-    const num = parseInt(color.replace("#", ""), 16);
-    const amt = Math.round(2.55 * percent);
-    const R = Math.max(0, Math.min(255, (num >> 16) + amt));
-    const G = Math.max(0, Math.min(255, (num >> 8 & 0x00FF) + amt));
-    const B = Math.max(0, Math.min(255, (num & 0x0000FF) + amt));
-    
-    return "#" + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
-}
-
-// Initialize gallery when the page loads
+// Inicializa a galeria quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
     initGallery();
 });

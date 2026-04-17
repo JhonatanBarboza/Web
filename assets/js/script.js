@@ -18,88 +18,6 @@ function showScreen(screenId) {
     }
 }
 
-// ==================== AUTENTICAÇÃO ====================
-// function switchTab(tabName) {
-//     // Alternar entre abas de login e cadastro
-//     const loginForm = document.getElementById('loginForm');
-//     const signupForm = document.getElementById('signupForm');
-//     const tabBtns = document.querySelectorAll('.tab-btn');
-
-//     tabBtns.forEach(btn => btn.classList.remove('active'));
-    
-//     if (tabName === 'login') {
-//         loginForm.classList.add('active');
-//         signupForm.classList.remove('active');
-//         tabBtns[0].classList.add('active');
-//     } else {
-//         loginForm.classList.remove('active');
-//         signupForm.classList.add('active');
-//         tabBtns[1].classList.add('active');
-//     }
-// }
-
-// function handleLogin() {
-//     const email = document.getElementById('loginEmail').value.trim();
-//     const password = document.getElementById('loginPassword').value.trim();
-
-//     if (!email || !password) {
-//         alert('Por favor, preencha todos os campos!');
-//         return;
-//     }
-
-//     // Simular login (dados dummy)
-//     currentUser = {
-//         id: 1,
-//         name: 'Ana',
-//         email: email,
-//         createdAt: new Date()
-//     };
-
-//     // Limpar formulário
-//     document.getElementById('loginForm').reset();
-
-//     // Ir para dashboard
-//     showScreen('dashboardScreen');
-//     updateDashboard();
-// }
-
-// function handleSignup() {
-//     const name = document.getElementById('signupName').value.trim();
-//     const email = document.getElementById('signupEmail').value.trim();
-//     const password = document.getElementById('signupPassword').value.trim();
-//     const confirm = document.getElementById('signupConfirm').value.trim();
-
-//     if (!name || !email || !password || !confirm) {
-//         alert('Por favor, preencha todos os campos!');
-//         return;
-//     }
-
-//     if (password !== confirm) {
-//         alert('As senhas não coincidem!');
-//         return;
-//     }
-
-//     if (password.length < 6) {
-//         alert('A senha deve ter no mínimo 6 caracteres!');
-//         return;
-//     }
-
-//     // Simular cadastro
-//     currentUser = {
-//         id: Math.random(),
-//         name: name,
-//         email: email,
-//         createdAt: new Date()
-//     };
-
-//     // Limpar formulário
-//     document.getElementById('signupForm').reset();
-
-//     // Voltar para aba de login
-//     switchTab('login');
-//     alert('Conta criada com sucesso! Você já pode fazer login.');
-// }
-
 function handleLogout() {
     const overlay = document.createElement("div");
     overlay.className = "overlay";
@@ -148,113 +66,6 @@ function updateDashboard() {
     }
 }
 
-// function goToDashboard() {
-//     showScreen('dashboardScreen');
-//     updateDashboard();
-// }
-
-// function viewMaterial(materialName) {
-//     currentMaterial = materialName;
-//     alert(`Abrindo anotações de ${materialName}. (Funcionalidade para Parte 2)`);
-// }
-
-// function showAddMaterialModal() {
-//     const newMaterialName = prompt('Digite o nome da nova matéria:');
-//     if (newMaterialName && newMaterialName.trim()) {
-//         alert(`Matéria "${newMaterialName}" adicionada! (Funcionalidade para Parte 2)`);
-//     }
-// }
-
-// ==================== UPLOAD E NOVA ANOTAÇÃO ====================
-// function goToUpload() {
-//     // Definir data atual
-//     const today = new Date().toISOString().split('T')[0];
-//     document.getElementById('noteDate').value = today;
-
-//     // Resetar upload
-//     resetFileSelection();
-
-//     showScreen('uploadScreen');
-// }
-
-// function handleFileSelect(event) {
-//     const file = event.target.files[0];
-
-//     if (!file) return;
-
-//     // Validar tipo de arquivo
-//     const validTypes = ['image/jpeg', 'image/png', 'application/pdf'];
-//     if (!validTypes.includes(file.type)) {
-//         alert('Formato inválido! Aceitar JPG, PNG ou PDF.');
-//         return;
-//     }
-
-//     uploadedFile = file;
-
-//     // Mostrar preview
-//     const reader = new FileReader();
-//     reader.onload = function(e) {
-//         document.getElementById('previewImage').src = e.target.result;
-//         document.getElementById('previewSection').style.display = 'block';
-//         document.querySelector('.drop-zone').style.display = 'none';
-//     };
-//     reader.readAsDataURL(file);
-// }
-
-// function resetFileSelection() {
-//     uploadedFile = null;
-//     document.getElementById('fileInput').value = '';
-//     document.getElementById('previewSection').style.display = 'none';
-//     document.querySelector('.drop-zone').style.display = 'block';
-// }
-
-// function handleTranscribe() {
-//     const material = document.getElementById('noteMaterial').value;
-//     const date = document.getElementById('noteDate').value;
-//     const title = document.getElementById('noteTitle').value;
-
-//     if (!material) {
-//         alert('Por favor, selecione uma matéria!');
-//         return;
-//     }
-
-//     if (!uploadedFile) {
-//         alert('Por favor, selecione uma imagem!');
-//         return;
-//     }
-
-//     // Simular processamento com loader
-//     showLoadingState();
-
-//     // Simular delay de IA (1-2 segundos)
-//     setTimeout(() => {
-//         hideLoadingState();
-
-//         // Criar nota dummy
-//         currentNote = {
-//             id: Math.random(),
-//             title: title || `Anotação - ${date}`,
-//             material: material,
-//             date: date,
-//             image: document.getElementById('previewImage').src,
-//             content: '<h3>Conceito de Derivada</h3><p>A derivada de uma função f(x) em um ponto x₀ é definida como o limite:</p><p style="text-align: center; font-family: \'Courier New\', monospace;">f\'(x₀) = lim(h→0) [f(x₀+h) - f(x₀)] / h</p><h3>Propriedades das Derivadas</h3><ul><li><strong>Regra da Potência:</strong> d/dx(xⁿ) = n·xⁿ⁻¹</li><li><strong>Regra do Produto:</strong> (f·g)\' = f\'·g + f·g\'</li><li><strong>Regra da Cadeia:</strong> (f∘g)\' = f\'(g)·g\'</li></ul>',
-//             createdAt: new Date()
-//         };
-
-//         // Ir para tela de visualização
-//         showNote();
-//     }, 2000);
-// }
-
-function showLoadingState() {
-    // Mostrar loader (simples)
-    alert('🔄 Processando imagem com IA...\nIsso pode levar alguns segundos.');
-}
-
-function hideLoadingState() {
-    // Hide loading (simples)
-}
-
 // ==================== VISUALIZAÇÃO DE ANOTAÇÃO ====================
 function showNote() {
     if (!currentNote) return;
@@ -278,36 +89,7 @@ function showNote() {
     showScreen('noteScreen');
 }
 
-// function goToNote() {
-//     showNote();
-// }
-
-// function handleDeleteNote() {
-//     if (confirm('Tem certeza que deseja excluir esta anotação?')) {
-//         currentNote = null;
-//         alert('Anotação excluída com sucesso!');
-//         goToDashboard();
-//     }
-// }
-
 // ==================== QUESTÕES DE REVISÃO ====================
-// function goToQuestions() {
-//     if (!currentNote) {
-//         alert('Nenhuma anotação selecionada!');
-//         return;
-//     }
-
-//     // Atualizar título das questões
-//     document.getElementById('questionsTitle').textContent = `Questões sobre ${currentNote.material}`;
-
-//     showScreen('questionsScreen');
-// }
-
-// function answerQuestion(questionNumber, answer) {
-//     console.log(`Questão ${questionNumber} respondida com: ${answer}`);
-//     // Atualizar progresso (simples)
-//     updateProgressBar();
-// }
 
 function updateProgressBar() {
     // Contar respostas selecionadas
@@ -317,19 +99,6 @@ function updateProgressBar() {
 
     document.getElementById('progressFill').style.width = progress + '%';
 }
-
-// function submitAnswers() {
-//     const radios = document.querySelectorAll('.questions-list input[type="radio"]:checked');
-//     const total = document.querySelectorAll('.questions-list .question-card').length;
-
-//     if (radios.length < total) {
-//         alert(`Por favor, responda todas as ${total} questões antes de finalizar!`);
-//         return;
-//     }
-
-//     alert('Revisão finalizada! (Validação real será na Parte 2)');
-//     goToNote();
-// }
 
 // ==================== DRAG AND DROP ====================
 document.addEventListener('DOMContentLoaded', function() {
@@ -411,4 +180,12 @@ function formatDate(date) {
 
 function getInitials(name) {
     return name.split(' ').map(n => n[0]).join('').toUpperCase();
+}
+
+goToDashboard = function() {
+    window.location.href = "../html/notebook.html";
+}
+
+function goToGallery(materialName) {
+    window.location.href = "../html/gallery.html?material=" + encodeURIComponent(materialName);
 }

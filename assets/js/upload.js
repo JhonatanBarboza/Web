@@ -1,17 +1,3 @@
-function goToDashboard() {
-    // Obter o material da URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const material = urlParams.get('material');
-    
-    if (material) {
-        // Se veio de uma galeria, voltar para a galeria
-        window.location.href = "../html/gallery.html?material=" + encodeURIComponent(material);
-    } else {
-        // Senão, voltar para o dashboard principal
-        window.location.href = "../html/notebook.html";
-    }
-}
-
 function handleFileSelect(event) {
     const file = event.target.files[0];
 
@@ -44,7 +30,7 @@ function resetFileSelection() {
 }
 
 function handleTranscribe() {
-    const material = document.getElementById('noteMaterial').value;
+    const material = new URLSearchParams(window.location.search).get('material');
     const date = document.getElementById('noteDate').value;
     const title = document.getElementById('noteTitle').value;
 
@@ -58,25 +44,24 @@ function handleTranscribe() {
         return;
     }
 
-    // Simular processamento com loader
-    showLoadingState();
+    // Criar nota dummy
+    const newNote = {
+        id: Math.random(),
+        title: title || `Anotação - ${date}`,
+        material: material,
+        date: date,
+        image: document.getElementById('previewImage').src,
+        content: '<h3>Conceito de Derivada</h3><p>A derivada de uma função f(x) em um ponto x₀ é definida como o limite:</p><p style="text-align: center; font-family: \'Courier New\', monospace;">f\'(x₀) = lim(h→0) [f(x₀+h) - f(x₀)] / h</p><h3>Propriedades das Derivadas</h3><ul><li><strong>Regra da Potência:</strong> d/dx(xⁿ) = n·xⁿ⁻¹</li><li><strong>Regra do Produto:</strong> (f·g)\' = f\'·g + f·g\'</li><li><strong>Regra da Cadeia:</strong> (f∘g)\' = f\'(g)·g\'</li></ul>',
+        createdAt: new Date()
+    };
 
-    // Simular delay de IA (1-2 segundos)
-    setTimeout(() => {
-        hideLoadingState();
+    // Ir para tela de visualização
+    createNote(newNote);
+}
 
-        // Criar nota dummy
-        currentNote = {
-            id: Math.random(),
-            title: title || `Anotação - ${date}`,
-            material: material,
-            date: date,
-            image: document.getElementById('previewImage').src,
-            content: '<h3>Conceito de Derivada</h3><p>A derivada de uma função f(x) em um ponto x₀ é definida como o limite:</p><p style="text-align: center; font-family: \'Courier New\', monospace;">f\'(x₀) = lim(h→0) [f(x₀+h) - f(x₀)] / h</p><h3>Propriedades das Derivadas</h3><ul><li><strong>Regra da Potência:</strong> d/dx(xⁿ) = n·xⁿ⁻¹</li><li><strong>Regra do Produto:</strong> (f·g)\' = f\'·g + f·g\'</li><li><strong>Regra da Cadeia:</strong> (f∘g)\' = f\'(g)·g\'</li></ul>',
-            createdAt: new Date()
-        };
-
-        // Ir para tela de visualização
-        showNote();
-    }, 2000);
+function createNote(newNote){
+    // voltar para a galeria, madando informações da nova nota (simulação)
+    localStorage.setItem('selectedNoteId', newNote.id);
+    localStorage.setItem('currentMaterial', newNote.material);
+    window.location.href = "../html/gallery.html?&material=" + encodeURIComponent(newNote.material) + "&title=" + encodeURIComponent(newNote.title) + "&content=" + encodeURIComponent(newNote.content) + "&new=true";
 }
