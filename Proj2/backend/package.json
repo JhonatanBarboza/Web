@@ -1,0 +1,15 @@
+{
+  "name": "pocoes-e-solucoes-backend",
+  "version": "1.0.0",
+  "description": "API REST da loja de poções Poções e Soluções",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
+    "sequelize": "^6.37.8",
+    "sqlite3": "^5.1.7"
+  }
+}

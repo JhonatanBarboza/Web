@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- O dashboard.css já importa todos os outros CSS (card, agendamento, avaliacoes, calendario, publicações) -->
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>Dashboard - Willam Barboza</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../images/logo.png" alt="Logo Willam Barboza" class="logo">
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item active">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="3" width="7" height="7"></rect>
+                                <rect x="14" y="14" width="7" height="7"></rect>
+                                <rect x="3" y="14" width="7" height="7"></rect>
+                            </svg>
+                            <span class="nav-text">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="abrirModalAgendamento(); return false;">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span class="nav-text">Cadastrar agendamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" onclick="abrirModalPublicacao(); return false;">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                <polyline points="21 15 16 10 5 21"></polyline>
+                            </svg>
+                            <span class="nav-text">Cadastrar publicação</span>
+                        </a>
+                    </li>
+                    <!-- itens de navegação aqui
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                                <polygon points="12 2 15.09 10.26 24 10.26 17.55 16.52 19.64 24.78 12 19.52 4.36 24.78 6.45 16.52 0 10.26 8.91 10.26 12 2"></polygon>
+                            </svg>
+                            <span class="nav-text">Avaliações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span class="nav-text">WhatsApp</span>
+                        </a>
+                    </li>
+                    -->
+                    <li class="nav-item">
+                        <a href="perfil.html" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span class="nav-text">Perfil</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar">W</div>
+                    <div class="user-details">
+                        <p class="user-name">Willam Barboza</p>
+                        <p class="user-role">Administrador</p>
+                    </div>
+                </div>
+                <a href="#" class="logout-link">
+                    <svg class="logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    Sair
+                </a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="top-bar-left">
+                    <span class="page-title">Dashboard</span>
+                </div>
+                <div class="top-bar-right">
+                    <img src="../images/icon_sino.png" alt="Notificação" class="notification-icon">
+                    <span class="current-date" id="currentDate"></span>
+                </div>
+            </header>
+            
+            <div class="content">
+                <h1 class="greeting">Olá Willian!</h1>
+                <div class="cards-grid" id="cardsContainer"></div>
+                <div class="middle-grid">
+                <div class="agendamentos-wrapper">
+                    <div class="wrapper">
+                        <div class="agendamento-tabs" id="agendamentoTabs">
+                            <div class="agendamento-tab-indicador" id="agendamentoTabIndicador"></div>
+                            <button type="button" class="agendamento-tab ativo" data-aba="proximos">Próximos Agendamentos</button>
+                            <button type="button" class="agendamento-tab" data-aba="historico">Histórico de Agendamentos</button>
+                        </div>
+                        <div id="lista"></div>
+                        <div class="footer">
+                            <a onclick="abrirModalAgendamento()">
+                            Cadastrar novo agendamento →<i style="font-size:14px;"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <script>
+                        // Utilitários de data compartilhados por agendamentos, calendário e modais
+                        // (única fonte de verdade para nomes de mês/dia da semana).
+                        const MESES_ABREV = ['JAN', 'FEV', 'MAR', 'ABR', 'MAI', 'JUN', 'JUL', 'AGO', 'SET', 'OUT', 'NOV', 'DEZ'];
+                        const DIAS_SEMANA = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+
+                        const agendamentos = [
+                            { dia: 5, mes: "MAI", ano: 2026, diaSemana: "Terça-feira", hora: "08:30", titulo: "Pintura de janelas", endereco: "Rua Bela Cintra, 412 · São Paulo/SP", status: "Concluído", cliente: "Renato Ferreira", telefone: "(11) 98741-2255", descricao: "Pintura de 8 janelas de madeira com tinta esmalte branca." },
+                            { dia: 18, mes: "MAI", ano: 2026, diaSemana: "Segunda-feira", hora: "14:00", titulo: "Grafiato", endereco: "Rua Teodoro Sampaio, 1320 · São Paulo/SP", status: "Concluído", cliente: "Vanessa Rocha", telefone: "(11) 98522-1144", descricao: "Aplicação de grafiato em parede externa da garagem." },
+                            { dia: 28, mes: "MAI", ano: 2026, diaSemana: "Quinta-feira", hora: "09:00", titulo: "Reparo hidráulico", endereco: "Rua Fradique Coutinho, 555 · São Paulo/SP", status: "Concluído", cliente: "Gabriel Martins", telefone: "(11) 97654-3322", descricao: "Correção de vazamento em tubulação do banheiro." },
+                            { dia: 2, mes: "JUN", ano: 2026, diaSemana: "Terça-feira", hora: "15:00", titulo: "Textura", endereco: "Rua Cardeal Arcoverde, 871 · São Paulo/SP", status: "Concluído", cliente: "Amanda Ribeiro", telefone: "(11) 97890-7766", descricao: "Aplicação de textura decorativa em parede da sala." },
+                            { dia: 7, mes: "JUN", ano: 2026, diaSemana: "Domingo", hora: "10:00", titulo: "Pintura de portões", endereco: "Rua Cerro Corá, 112 · São Paulo/SP", status: "Concluído", cliente: "Roberto Nunes", telefone: "(11) 98111-4455", descricao: "Lixamento e pintura de portão metálico residencial." },
+                            { dia: 10, mes: "JUN", ano: 2026, diaSemana: "Quarta-feira", hora: "09:00", titulo: "Pintura de portas", endereco: "Rua Itápolis, 88 · São Paulo/SP", status: "Concluído", cliente: "Marcos Vinícius", telefone: "(11) 92222-3344", descricao: "Pintura de 4 portas internas com tinta esmalte sintético." },
+                            { dia: 12, mes: "JUN", ano: 2026, diaSemana: "Sexta-feira", hora: "14:30", titulo: "Reparo elétrico", endereco: "Rua Harmonia, 210 · São Paulo/SP", status: "Concluído", cliente: "Patrícia Gomes", telefone: "(11) 91111-2233", descricao: "Substituição de tomadas e revisão do quadro de luz da cozinha." },
+                            { dia: 15, mes: "JUN", ano: 2026, diaSemana: "Segunda-feira", hora: "11:00", titulo: "Pintura externa", endereco: "Rua Girassol, 77 · São Paulo/SP", status: "Cancelado", cliente: "Eduardo Tavares", telefone: "(11) 90000-4455", descricao: "Pintura da fachada cancelada devido à previsão de chuva." },
+                            { dia: 18, mes: "JUN", ano: 2026, diaSemana: "Quinta-feira", hora: "08:00", titulo: "Cimento queimado", endereco: "Rua dos Três Irmãos, 250 · São Paulo/SP", status: "Agendado", cliente: "Priscila Almeida", telefone: "(11) 98456-7788", descricao: "Aplicação de cimento queimado em sala de estar." },
+                            { dia: 19, mes: "JUN", ano: 2026, diaSemana: "Sexta-feira", hora: "13:30", titulo: "Pintura de calhas e rufos", endereco: "Rua Nazaré Paulista, 65 · São Paulo/SP", status: "Agendado", cliente: "Rafael Costa", telefone: "(11) 97122-5566", descricao: "Tratamento anticorrosivo e pintura de calhas metálicas." },
+                            { dia: 21, mes: "JUN", ano: 2026, diaSemana: "Domingo", hora: "09:00", titulo: "Textura", endereco: "Rua João Moura, 730 · São Paulo/SP", status: "Agendado", cliente: "Larissa Mendes", telefone: "(11) 96321-8877", descricao: "Aplicação de textura rústica em área gourmet." },
+                            { dia: 23, mes: "JUN", ano: 2026, diaSemana: "Terça-feira", hora: "14:00", titulo: "Pintura interna", endereco: "Jardim das Flores, 45 · São Paulo/SP", status: "Agendado", cliente: "João da Silva", telefone: "(11) 98765-4321", descricao: "Pintura das paredes internas da sala e dos quartos." },
+                            { dia: 25, mes: "JUN", ano: 2026, diaSemana: "Quinta-feira", hora: "08:30", titulo: "Pintura de janelas", endereco: "Rua Capote Valente, 420 · São Paulo/SP", status: "Agendado", cliente: "Felipe Azevedo", telefone: "(11) 96987-1234", descricao: "Restauração e pintura de janelas de madeira." },
+                            { dia: 27, mes: "JUN", ano: 2026, diaSemana: "Sábado", hora: "15:30", titulo: "Reparo hidráulico", endereco: "Rua Vergueiro, 890 · São Paulo/SP", status: "Agendado", cliente: "Ana Beatriz", telefone: "(11) 98888-1122", descricao: "Reparo de vazamento na tubulação da área de serviço." },
+                            { dia: 30, mes: "JUN", ano: 2026, diaSemana: "Terça-feira", hora: "09:00", titulo: "Troca de piso", endereco: "Alameda Santos, 520 · São Paulo/SP", status: "Agendado", cliente: "Pedro Henrique", telefone: "(11) 97777-3344", descricao: "Substituição de piso laminado por porcelanato." },
+                            { dia: 4, mes: "JUL", ano: 2026, diaSemana: "Sábado", hora: "10:30", titulo: "Grafiato", endereco: "Rua dos Pinheiros, 910 · São Paulo/SP", status: "Agendado", cliente: "Bruna Carvalho", telefone: "(11) 96444-2233", descricao: "Aplicação de grafiato na fachada principal." },
+                            { dia: 11, mes: "JUL", ano: 2026, diaSemana: "Sábado", hora: "08:00", titulo: "Pintura de portões", endereco: "Rua Purpurina, 145 · São Paulo/SP", status: "Agendado", cliente: "Marcelo Teixeira", telefone: "(11) 95123-4455", descricao: "Pintura completa de portão basculante residencial." },
+                            { dia: 20, mes: "JUL", ano: 2026, diaSemana: "Segunda-feira", hora: "11:00", titulo: "Outro", endereco: "Rua Oscar Freire, 210 · São Paulo/SP", status: "Agendado", cliente: "Juliana Costa", telefone: "(11) 94444-9900", descricao: "Montagem de armários planejados na cozinha e quarto." },
+                            { dia: 5, mes: "AGO", ano: 2026, diaSemana: "Quarta-feira", hora: "14:00", titulo: "Reparo elétrico", endereco: "Av. Rebouças, 1020 · São Paulo/SP", status: "Agendado", cliente: "Thiago Moreira", telefone: "(11) 99222-7788", descricao: "Instalação de novos circuitos para ar-condicionado." },
+                            { dia: 15, mes: "AGO", ano: 2026, diaSemana: "Sábado", hora: "09:30", titulo: "Pintura externa", endereco: "Rua dos Jasmins, 88 · São Paulo/SP", status: "Agendado", cliente: "Camila Fernandes", telefone: "(11) 99555-1122", descricao: "Pintura completa da fachada e muro frontal." }
+                        ];
+                        const lista = document.getElementById("lista");
+
+                        // Classe CSS (sem acento) usada para colorir o badge e o ponto do menu
+                        const STATUS_OPCOES = ['Agendado', 'Concluído', 'Cancelado', 'Indisponível'];
+                        function statusClasse(status) {
+                            if (status === 'Concluído') return 'concluido';
+                            if (status === 'Cancelado') return 'cancelado';
+                            if (status === 'Indisponível') return 'indisponivel';
+                            return 'agendado';
+                        }
+
+                        // ===== SEPARAÇÃO POR DATA: "Próximos agendamentos" vs "Histórico" =====
+                        // A mesma fonte de dados (`agendamentos`) alimenta as duas abas: a aba só
+                        // decide o filtro/ordenação aplicados na hora de renderizar a lista.
+                        function dataAgendamento(a) {
+                            return new Date(a.ano, MESES_ABREV.indexOf(a.mes), a.dia);
+                        }
+
+                        function hojeMeiaNoite() {
+                            const hoje = new Date();
+                            hoje.setHours(0, 0, 0, 0);
+                            return hoje;
+                        }
+
+                        // Compara por data e, no mesmo dia, por horário (ambos no formato "HH:MM", comparáveis como texto)
+                        function compararDataHora(a, b) {
+                            const diff = dataAgendamento(a) - dataAgendamento(b);
+                            if (diff !== 0) return diff;
+                            return a.hora.localeCompare(b.hora);
+                        }
+
+                        // Intervalo (segunda a domingo) da semana atual, usado pela métrica
+                        // "Agendamentos esta semana" no card do topo do dashboard.
+                        function obterIntervaloSemanaAtual() {
+                            const hoje = hojeMeiaNoite();
+                            const diaSemana = hoje.getDay(); // 0 = Domingo ... 6 = Sábado
+                            const deslocamentoSegunda = diaSemana === 0 ? 6 : diaSemana - 1;
+                            const inicio = new Date(hoje);
+                            inicio.setDate(hoje.getDate() - deslocamentoSegunda);
+                            const fim = new Date(inicio);
+                            fim.setDate(inicio.getDate() + 6);
+                            return { inicio, fim };
+                        }
+
+                        function contarAgendamentosDaSemana() {
+                            const { inicio, fim } = obterIntervaloSemanaAtual();
+                            return agendamentos.filter((a) => {
+                                const data = dataAgendamento(a);
+                                return data >= inicio && data <= fim;
+                            }).length;
+                        }
+
+                        // `atualizarMetricasDashboard` só é definida no script dos cards (mais abaixo no
+                        // documento). Este wrapper evita ReferenceError nas primeiras renderizações
+                        // (página ainda carregando) e centraliza a chamada usada por todas as seções.
+                        function atualizarMetricasDashboardSeDisponivel() {
+                            if (typeof atualizarMetricasDashboard === 'function') atualizarMetricasDashboard();
+                        }
+
+                        let abaAgendamentoAtiva = 'proximos';
+
+                        // Retorna os agendamentos da aba ativa, já ordenados, mantendo o índice
+                        // original (necessário para as ações de status/edição/exclusão no array completo)
+                        function agendamentosDaAbaAtiva() {
+                            const hoje = hojeMeiaNoite();
+                            const comIndice = agendamentos
+                                .map((a, idx) => ({ a, idx }))
+                                .filter(({ a }) => abaAgendamentoAtiva === 'proximos'
+                                    ? dataAgendamento(a) >= hoje
+                                    : dataAgendamento(a) < hoje);
+
+                            comIndice.sort((x, y) => abaAgendamentoAtiva === 'proximos'
+                                ? compararDataHora(x.a, y.a)
+                                : compararDataHora(y.a, x.a));
+
+                            return comIndice;
+                        }
+
+                        function renderAgendamentos() {
+                            const itens = agendamentosDaAbaAtiva();
+
+                            if (!itens.length) {
+                                lista.innerHTML = `<p class="lista-vazia">${abaAgendamentoAtiva === 'proximos'
+                                    ? 'Nenhum agendamento futuro.'
+                                    : 'Nenhum agendamento no histórico.'}</p>`;
+                                atualizarMetricasDashboardSeDisponivel();
+                                return;
+                            }
+
+                            lista.innerHTML = itens.map(({ a, idx }) => `
+                                <div class="agendamento" data-idx="${idx}">
+                                <div class="data-bloco">
+                                    <div class="dia">${a.dia}</div>
+                                    <div class="mes">${a.mes}</div>
+                                </div>
+                                <div class="divider-v"></div>
+                                <div class="info">
+                                    <p class="hora">${a.diaSemana} · ${a.hora}</p>
+                                    <p class="titulo">${a.titulo}</p>
+                                    <p class="endereco">${a.endereco}</p>
+                                </div>
+                                <div class="agendamento-acoes">
+                                    <div class="status-dropdown" data-idx="${idx}">
+                                        <button type="button" class="status-badge-btn ${statusClasse(a.status)}" data-action="abrir-status">
+                                            ${a.status}
+                                            <svg class="status-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                        </button>
+                                        <div class="status-menu">
+                                            <div class="status-menu-titulo">Alterar status</div>
+                                            ${STATUS_OPCOES.map(opcao => `
+                                                <button type="button" class="status-menu-item" data-action="selecionar-status" data-status="${opcao}">
+                                                    <span class="status-dot ${statusClasse(opcao)}"></span>${opcao}
+                                                </button>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+                                    <button class="btn-excluir" data-idx="${idx}" data-action="excluir" title="Excluir agendamento" aria-label="Excluir agendamento">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                            <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </button>
+                                </div>
+                                </div>
+                            `).join('');
+                            atualizarMetricasDashboardSeDisponivel();
+                        }
+
+                        // ===== ALTERNÂNCIA DE ABAS (segmented control com indicador deslizante) =====
+                        const agendamentoTabIndicador = document.getElementById('agendamentoTabIndicador');
+
+                        document.getElementById('agendamentoTabs').addEventListener('click', (e) => {
+                            const botao = e.target.closest('.agendamento-tab');
+                            if (!botao || botao.dataset.aba === abaAgendamentoAtiva) return;
+
+                            abaAgendamentoAtiva = botao.dataset.aba;
+                            document.querySelectorAll('.agendamento-tab').forEach(b => b.classList.toggle('ativo', b === botao));
+                            agendamentoTabIndicador.classList.toggle('historico', abaAgendamentoAtiva === 'historico');
+                            renderAgendamentos();
+                        });
+
+                        renderAgendamentos();
+
+                        // Recalcula as abas automaticamente quando o dia muda (ex.: painel aberto durante a virada da meia-noite),
+                        // sem precisar recarregar a página.
+                        let ultimaMeiaNoiteRenderizada = hojeMeiaNoite().getTime();
+                        setInterval(() => {
+                            const meiaNoiteAtual = hojeMeiaNoite().getTime();
+                            if (meiaNoiteAtual !== ultimaMeiaNoiteRenderizada) {
+                                ultimaMeiaNoiteRenderizada = meiaNoiteAtual;
+                                renderAgendamentos();
+                            }
+                        }, 60000);
+
+                        // ===== DROPDOWN DE STATUS (abrir/fechar/selecionar) =====
+                        lista.addEventListener('click', (e) => {
+                            const botaoAbrir = e.target.closest('[data-action="abrir-status"]');
+                            const itemMenu = e.target.closest('[data-action="selecionar-status"]');
+                            const botaoExcluir = e.target.closest('[data-action="excluir"]');
+
+                            if (botaoAbrir) {
+                                const menu = botaoAbrir.closest('.status-dropdown').querySelector('.status-menu');
+                                const jaAberto = menu.classList.contains('aberto');
+                                lista.querySelectorAll('.status-menu.aberto').forEach(m => m.classList.remove('aberto'));
+                                lista.querySelectorAll('.status-badge-btn.aberto').forEach(b => b.classList.remove('aberto'));
+                                if (!jaAberto) {
+                                    menu.classList.add('aberto');
+                                    botaoAbrir.classList.add('aberto');
+                                }
+                                return;
+                            }
+
+                            if (itemMenu) {
+                                const idx = Number(itemMenu.closest('.status-dropdown').dataset.idx);
+                                agendamentos[idx].status = itemMenu.dataset.status;
+                                renderAgendamentos();
+                                renderCalendario();
+                                return;
+                            }
+
+                            if (botaoExcluir) {
+                                const idx = Number(botaoExcluir.dataset.idx);
+                                abrirConfirmacaoExclusao(
+                                    'Excluir Agendamento',
+                                    'Tem certeza que deseja excluir este agendamento?<br><br>Esta ação não poderá ser desfeita.',
+                                    () => {
+                                        agendamentos.splice(idx, 1);
+                                        renderAgendamentos();
+                                        renderCalendario();
+                                        mostrarToast('Agendamento excluído com sucesso.');
+                                    }
+                                );
+                                return;
+                            }
+
+                            // Clique em qualquer outra área do card (fora do status/lixeira) abre os detalhes
+                            if (e.target.closest('.agendamento-acoes')) return;
+                            const card = e.target.closest('.agendamento');
+                            if (card) abrirModalDetalhesAgendamento(Number(card.dataset.idx));
+                        });
+
+                        // Fecha o dropdown ao clicar fora dele
+                        document.addEventListener('click', (e) => {
+                            if (!e.target.closest('.status-dropdown')) {
+                                lista.querySelectorAll('.status-menu.aberto').forEach(m => m.classList.remove('aberto'));
+                                lista.querySelectorAll('.status-badge-btn.aberto').forEach(b => b.classList.remove('aberto'));
+                            }
+                        });
+                    </script>
+                </div>
+
+                <div class="card-placeholder">
+                    <div class="card-calendario">
+                        <!-- Cabeçalho: navegação entre meses -->
+                        <div class="cal-header">
+                            <button class="cal-nav" id="calPrev" aria-label="Mês anterior">&#8249;</button>
+                            <span class="cal-title" id="calTitle"></span>
+                            <button class="cal-nav" id="calNext" aria-label="Próximo mês">&#8250;</button>
+                        </div>
+
+                        <!-- Dias da semana -->
+                        <div class="cal-weekdays">
+                            <span>Dom</span><span>Seg</span><span>Ter</span>
+                            <span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span>
+                        </div>
+
+                        <!-- Grelha de dias (gerada via JS) -->
+                        <div class="cal-grid" id="calGrid"></div>
+
+                        <!-- Legenda de estados (mesmas cores usadas nos badges de status dos agendamentos) -->
+                        <div class="cal-legend">
+                            <span class="cal-legenda"><i class="cal-dot agendado"></i>Agendado</span>
+                            <span class="cal-legenda"><i class="cal-dot concluido"></i>Concluído</span>
+                            <span class="cal-legenda"><i class="cal-dot cancelado"></i>Cancelado</span>
+                        </div>
+
+                        <!-- Popover com os agendamentos do dia clicado (gerado via JS) -->
+                        <div class="cal-popover" id="calPopover"></div>
+                    </div>
+
+                    <script>
+                        // ===== CALENDÁRIO INTERATIVO =====
+                        // Os indicadores vêm diretamente do array `agendamentos` (mesma fonte de dados
+                        // da lista "Próximos agendamentos"), por isso o calendário fica sempre sincronizado:
+                        // basta chamar renderCalendario() de novo depois de qualquer criação/edição/exclusão.
+                        const NOMES_MES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+                                           'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+                        // Dia destacado e mês mostrado inicialmente (Junho de 2026, mesmo período dos agendamentos de exemplo)
+                        const DIA_SELECIONADO = { ano: 2026, mes: 5, dia: 17 };
+                        let calData = { ano: 2026, mes: 5 };
+
+                        // Retorna os agendamentos (com o seu índice original no array) de uma data específica
+                        function agendamentosDoDia(ano, mes, dia) {
+                            return agendamentos
+                                .map((agendamento, idx) => ({ agendamento, idx }))
+                                .filter(({ agendamento }) =>
+                                    agendamento.ano === ano &&
+                                    MESES_ABREV.indexOf(agendamento.mes) === mes &&
+                                    agendamento.dia === dia
+                                );
+                        }
+
+                        const MAX_PONTOS_VISIVEIS = 3;
+
+                        function indicadoresDoDia(itens) {
+                            if (!itens.length) return '';
+                            if (itens.length > MAX_PONTOS_VISIVEIS) {
+                                return `<div class="cal-dots"><span class="cal-contador">${itens.length}</span></div>`;
+                            }
+                            const pontos = itens.map(({ agendamento }) => `<i class="cal-dot ${statusClasse(agendamento.status)}"></i>`).join('');
+                            return `<div class="cal-dots">${pontos}</div>`;
+                        }
+
+                        function renderCalendario() {
+                            fecharPopoverCalendario();
+
+                            const { ano, mes } = calData;
+                            document.getElementById('calTitle').textContent = `${NOMES_MES[mes]} ${ano}`;
+
+                            const grid = document.getElementById('calGrid');
+                            let html = '';
+
+                            const primeiroDiaSemana = new Date(ano, mes, 1).getDay();   // 0 = Domingo
+                            const diasNoMes = new Date(ano, mes + 1, 0).getDate();
+                            const diasMesAnterior = new Date(ano, mes, 0).getDate();
+
+                            // Dias do mês anterior para preencher o início da grelha
+                            for (let i = primeiroDiaSemana; i > 0; i--) {
+                                html += `<div class="cal-dia fora">${diasMesAnterior - i + 1}</div>`;
+                            }
+
+                            // Dias do mês atual
+                            for (let dia = 1; dia <= diasNoMes; dia++) {
+                                const itensDoDia = agendamentosDoDia(ano, mes, dia);
+                                const temEventos = itensDoDia.length > 0;
+                                const selecionado = (ano === DIA_SELECIONADO.ano && mes === DIA_SELECIONADO.mes && dia === DIA_SELECIONADO.dia)
+                                    ? ' selecionado' : '';
+                                html += `<div class="cal-dia${selecionado}${temEventos ? ' tem-eventos' : ''}" data-ano="${ano}" data-mes="${mes}" data-dia="${dia}"><span>${dia}</span>${indicadoresDoDia(itensDoDia)}</div>`;
+                            }
+
+                            // Dias do próximo mês para completar a última semana
+                            const restantes = (7 - ((primeiroDiaSemana + diasNoMes) % 7)) % 7;
+                            for (let dia = 1; dia <= restantes; dia++) {
+                                html += `<div class="cal-dia fora">${dia}</div>`;
+                            }
+
+                            grid.innerHTML = html;
+                        }
+
+                        // ===== POPOVER: agendamentos do dia (abre ao passar o mouse, sem precisar clicar) =====
+                        const calPopover = document.getElementById('calPopover');
+                        let calPopoverTimeoutFechar = null;
+
+                        function cancelarFechamentoPopover() {
+                            if (calPopoverTimeoutFechar) {
+                                clearTimeout(calPopoverTimeoutFechar);
+                                calPopoverTimeoutFechar = null;
+                            }
+                        }
+
+                        function agendarFechamentoPopover() {
+                            cancelarFechamentoPopover();
+                            calPopoverTimeoutFechar = setTimeout(fecharPopoverCalendario, 150);
+                        }
+
+                        function fecharPopoverCalendario() {
+                            cancelarFechamentoPopover();
+                            calPopover.classList.remove('aberto');
+                        }
+
+                        function abrirPopoverCalendario(celula) {
+                            const ano = Number(celula.dataset.ano);
+                            const mes = Number(celula.dataset.mes);
+                            const dia = Number(celula.dataset.dia);
+                            const itens = agendamentosDoDia(ano, mes, dia);
+                            if (!itens.length) return;
+
+                            const dataFormatada = `${String(dia).padStart(2, '0')}/${String(mes + 1).padStart(2, '0')}/${ano}`;
+                            calPopover.innerHTML = `
+                                <div class="cal-popover-data">${dataFormatada}</div>
+                                ${itens.map(({ agendamento, idx }) => `
+                                    <button type="button" class="cal-popover-item" data-idx="${idx}">
+                                        <span class="status-dot ${statusClasse(agendamento.status)}"></span>
+                                        ${agendamento.titulo}${agendamento.cliente ? ' - ' + agendamento.cliente : ''}
+                                    </button>
+                                `).join('')}
+                            `;
+
+                            const card = document.querySelector('.card-calendario');
+                            const cardRect = card.getBoundingClientRect();
+                            const celulaRect = celula.getBoundingClientRect();
+
+                            calPopover.style.left = '0px';
+                            calPopover.style.top = `${celulaRect.bottom - cardRect.top + 6}px`;
+                            calPopover.classList.add('aberto');
+
+                            const esquerdaDesejada = celulaRect.left - cardRect.left;
+                            const limiteEsquerda = card.clientWidth - calPopover.offsetWidth - 8;
+                            calPopover.style.left = `${Math.max(8, Math.min(esquerdaDesejada, limiteEsquerda))}px`;
+                        }
+
+                        const calGrid = document.getElementById('calGrid');
+
+                        // Passar o mouse já mostra o resumo do dia, sem precisar clicar primeiro
+                        calGrid.addEventListener('mouseover', (e) => {
+                            const celula = e.target.closest('.cal-dia.tem-eventos');
+                            if (!celula) return;
+                            cancelarFechamentoPopover();
+                            abrirPopoverCalendario(celula);
+                        });
+
+                        calGrid.addEventListener('mouseout', (e) => {
+                            const celula = e.target.closest('.cal-dia.tem-eventos');
+                            if (!celula) return;
+                            agendarFechamentoPopover();
+                        });
+
+                        calPopover.addEventListener('mouseenter', cancelarFechamentoPopover);
+                        calPopover.addEventListener('mouseleave', agendarFechamentoPopover);
+
+                        // Clique mantém a abertura (necessário em ecrãs sem hover, como toque/mobile)
+                        calGrid.addEventListener('click', (e) => {
+                            const celula = e.target.closest('.cal-dia.tem-eventos');
+                            if (!celula) return;
+                            cancelarFechamentoPopover();
+                            abrirPopoverCalendario(celula);
+                        });
+
+                        calPopover.addEventListener('click', (e) => {
+                            const item = e.target.closest('.cal-popover-item');
+                            if (!item) return;
+                            fecharPopoverCalendario();
+                            abrirModalDetalhesAgendamento(Number(item.dataset.idx));
+                        });
+
+                        // Fecha o popover ao clicar fora dele ou fora de um dia com eventos (uso em toque/mobile)
+                        document.addEventListener('click', (e) => {
+                            if (!e.target.closest('.cal-popover') && !e.target.closest('.cal-dia.tem-eventos')) {
+                                fecharPopoverCalendario();
+                            }
+                        });
+
+                        // Navegação entre meses
+                        document.getElementById('calPrev').addEventListener('click', () => {
+                            if (--calData.mes < 0) { calData.mes = 11; calData.ano--; }
+                            renderCalendario();
+                        });
+                        document.getElementById('calNext').addEventListener('click', () => {
+                            if (++calData.mes > 11) { calData.mes = 0; calData.ano++; }
+                            renderCalendario();
+                        });
+
+                        renderCalendario();
+                    </script>
+                </div>
+
+                <div class="card-avaliacoes">
+                    <h2>Avaliações</h2>
+                
+                    <div class="lista-avaliacoes" id="lista-avaliacoes">
+                    <!-- Itens gerados via JS -->
+                    </div>
+                
+                    <div class="card-footer">
+                    </div>
+                </div>
+                
+                <script>
+                    const avaliacoes = [
+                        { nome: "João da Silva", estrelas: 5, texto: "Equipe muito profissional, entregou o serviço antes do prazo e com excelente acabamento. Ficamos muito satisfeitos com o resultado final e com a organização durante toda a obra.", status: "aprovado", expandido: false },
+                        { nome: "Maria Oliveira", estrelas: 4, texto: "Atendimento rápido e execução de qualidade. Recomendo.", status: "aprovado", expandido: false },
+                        { nome: "Carlos Santos", estrelas: 5, texto: "Fiquei muito satisfeito com a reforma. Resultado acima das expectativas. A equipe foi pontual, cuidadosa com os móveis e deixou o ambiente limpo ao final de cada etapa do serviço.", status: "pendente", expandido: false },
+                        { nome: "Ana Beatriz", estrelas: 4, texto: "Serviço bem executado, apenas houve um pequeno atraso no início.", status: "rejeitado", expandido: false },
+                        { nome: "Pedro Henrique", estrelas: 3, texto: "O trabalho foi concluído, mas gostaria de um retorno sobre alguns ajustes.", status: "pendente", expandido: false },
+                        { nome: "Fernanda Lima", estrelas: 2, texto: "A execução não ficou conforme o combinado inicialmente.", status: "rejeitado", expandido: false },
+                        { nome: "Lucas Almeida", estrelas: 5, texto: "Excelente comunicação durante toda a obra e ótimo resultado final. Recomendo fortemente a equipe para quem busca qualidade e respeito aos prazos combinados.", status: "aprovado", expandido: false },
+                        { nome: "Juliana Costa", estrelas: 4, texto: "Profissionais educados e organizados. Serviço muito bom.", status: "aprovado", expandido: false },
+                        { nome: "Ricardo Souza", estrelas: 3, texto: "Atendeu parcialmente minhas expectativas. Aguardo contato da equipe.", status: "pendente", expandido: false },
+                        { nome: "Camila Ferreira", estrelas: 2, texto: "Tive alguns problemas durante o atendimento e solicitei revisão.", status: "rejeitado", expandido: false },
+                        { nome: "Marcos Vinícius", estrelas: 5, texto: "Excelente experiência do início ao fim. A equipe demonstrou conhecimento técnico, organização e compromisso com a qualidade. O resultado ficou exatamente como planejado.", status: "aprovado", expandido: false },
+                        { nome: "Patrícia Gomes", estrelas: 4, texto: "Gostei bastante do atendimento e da atenção aos detalhes. Houve pequenos ajustes durante a execução, mas tudo foi resolvido rapidamente.", status: "aprovado", expandido: false },
+                        { nome: "Bruno Carvalho", estrelas: 3, texto: "O serviço foi realizado dentro do esperado, porém ainda aguardo retorno sobre algumas dúvidas relacionadas à garantia do trabalho executado.", status: "pendente", expandido: false },
+                        { nome: "Larissa Martins", estrelas: 5, texto: "Profissionais extremamente competentes e educados. A reforma foi concluída antes do prazo previsto e o acabamento ficou impecável.", status: "aprovado", expandido: false },
+                        { nome: "Roberto Nunes", estrelas: 2, texto: "Infelizmente ocorreram divergências entre o orçamento apresentado e o serviço executado. Solicitei uma revisão para alinhar os pontos pendentes.", status: "rejeitado", expandido: false },
+                        { nome: "Tatiane Ribeiro", estrelas: 4, texto: "Equipe organizada, transparente e sempre disponível para esclarecer dúvidas. O resultado final ficou muito satisfatório.", status: "aprovado", expandido: false },
+                        { nome: "Gustavo Moreira", estrelas: 3, texto: "O trabalho foi concluído, mas identifiquei alguns detalhes que precisam de correção. Estou aguardando um posicionamento da equipe.", status: "pendente", expandido: false }                    
+                    ];
+                
+                    const statusLabel = {
+                    aprovado: "Aprovado",
+                    pendente: "Pendente",
+                    rejeitado: "Rejeitado"
+                    };
+                
+                    function renderEstrelas(qtd, total = 5) {
+                    let html = '';
+                    for (let i = 1; i <= total; i++) {
+                        const inativa = i > qtd ? ' inativa' : '';
+                        html += `<img src="../images/icon_estrela.png" alt="estrela" class="${inativa ? 'inativa' : ''}">`;
+                    }
+                    return html;
+                    }
+                
+                    function renderAvaliacoes() {
+                    const lista = document.getElementById('lista-avaliacoes');
+                    lista.innerHTML = avaliacoes.map((av, idx) => `
+                        <div class="avaliacao-item${av.expandido ? ' expandido' : ''}" data-idx="${idx}">
+                        <div class="avaliacao-avatar">
+                            <img src="../images/icon_feliz.png" alt="avatar">
+                        </div>
+                        <div class="avaliacao-info">
+                            <div class="avaliacao-nome">${av.nome}</div>
+                            <div class="avaliacao-estrelas">${renderEstrelas(av.estrelas)}</div>
+                            <div class="avaliacao-texto">${av.texto}</div>
+                            <span class="avaliacao-ver-mais">${av.expandido ? '▲ Ver menos' : '▼ Ver mais'}</span>
+                        </div>
+                        <div class="avaliacao-acoes">
+                            <span class="badge-status ${av.status}" data-idx="${idx}" data-action="toggle" title="Clique para aprovar/rejeitar">${statusLabel[av.status]}</span>
+                            <button class="btn-excluir" data-idx="${idx}" data-action="excluir" title="Excluir avaliação" aria-label="Excluir avaliação">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        </div>
+                    `).join('');
+                    sincronizarAlturaTextoAvaliacoes();
+                    atualizarMetricasDashboardSeDisponivel();
+                    }
+
+                    // Define a altura visível do comentário sem animar (usado logo após o render,
+                    // para que os cards já abertos não "cresçam" de novo a cada re-renderização).
+                    function aplicarEstadoTextoAvaliacao(elTexto, expandido) {
+                        elTexto.style.maxHeight = expandido ? `${elTexto.scrollHeight}px` : '18px';
+                    }
+
+                    function sincronizarAlturaTextoAvaliacoes() {
+                        lista.querySelectorAll('.avaliacao-item').forEach((item) => {
+                            const idx = Number(item.dataset.idx);
+                            const elTexto = item.querySelector('.avaliacao-texto');
+                            elTexto.style.transition = 'none';
+                            aplicarEstadoTextoAvaliacao(elTexto, avaliacoes[idx].expandido);
+                            elTexto.offsetHeight; // força o reflow antes de reativar a transição
+                            elTexto.style.transition = '';
+                        });
+                    }
+
+                    // Um único listener trata as ações (aprovar/rejeitar, excluir) e a expansão do card
+                    document.getElementById('lista-avaliacoes').addEventListener('click', (e) => {
+                    const alvo = e.target.closest('[data-action]');
+
+                    if (alvo) {
+                        const idx = Number(alvo.dataset.idx);
+                        if (alvo.dataset.action === 'toggle') {
+                            // Clicar no estado alterna entre aprovado <-> rejeitado
+                            avaliacoes[idx].status = avaliacoes[idx].status === 'aprovado' ? 'rejeitado' : 'aprovado';
+                            renderAvaliacoes();
+                        } else if (alvo.dataset.action === 'excluir') {
+                            // Clicar na lixeira remove a avaliação (com confirmação via modal)
+                            abrirConfirmacaoExclusao(
+                                'Excluir Avaliação',
+                                'Tem certeza que deseja excluir esta avaliação?<br><br>Esta ação não poderá ser desfeita.',
+                                () => {
+                                    avaliacoes.splice(idx, 1);
+                                    renderAvaliacoes();
+                                    mostrarToast('Avaliação excluída com sucesso.');
+                                }
+                            );
+                        }
+                        return;
+                    }
+
+                    // Clique em qualquer outra área do card expande/recolhe o comentário completo
+                    const item = e.target.closest('.avaliacao-item');
+                    if (!item) return;
+                    const idx = Number(item.dataset.idx);
+                    const av = avaliacoes[idx];
+                    av.expandido = !av.expandido;
+                    item.classList.toggle('expandido', av.expandido);
+                    item.querySelector('.avaliacao-ver-mais').textContent = av.expandido ? '▲ Ver menos' : '▼ Ver mais';
+                    aplicarEstadoTextoAvaliacao(item.querySelector('.avaliacao-texto'), av.expandido);
+                    });
+
+                    renderAvaliacoes();
+                </script>
+            </div>
+
+                <!-- ===== PUBLICAÇÕES RECENTES ===== -->
+                <div class="card-publicacoes">
+                    <h2>Publicações recentes</h2>
+
+                    <div class="publicacoes-lista" id="publicacoes-lista">
+                    <!-- Itens gerados via JS -->
+                    </div>
+
+                    <div class="card-footer">
+                    <a onclick="abrirModalPublicacao()">Cadastrar nova publicação →</a>
+                    </div>
+                </div>
+
+                <script>
+                    // ===== PUBLICAÇÕES RECENTES =====
+                    // Pasta local das imagens das publicações.
+                    const CAMINHO_IMAGENS = '../images/Publicacoes/';
+                    const TOTAL_IMAGENS = 10; // nº de ficheiros existentes: publicacoes_1.png, publicacoes_2.png, ...
+
+                    // Dados das publicações (8 exemplos). A imagem percorre os ficheiros disponíveis.
+                    const publicacoes = Array.from({ length: 10 }, (_, i) => ({
+                        titulo: 'Pintura externa',
+                        categoria: 'Pintura externa',
+                        descricao: 'Serviço de pintura externa realizado com tinta acrílica premium. Preparação da superfície, aplicação de fundo selador e duas demãos de acabamento para maior durabilidade e proteção.',
+                        data: '02/03/2026',
+                        status: i % 4 === 0 ? 'Não Publicado' : 'Publicado',
+                        imagem: `${CAMINHO_IMAGENS}publicacoes_${(i % TOTAL_IMAGENS) + 1}.png`
+                    }));
+
+                    // Renderiza os cards: imagem à esquerda + descrição à direita.
+                    // Se a imagem não existir, recorre à publicacoes_1.png (onerror).
+                    function renderPublicacoes() {
+                        const lista = document.getElementById('publicacoes-lista');
+                        lista.innerHTML = publicacoes.map((pub, idx) => `
+                            <div class="publicacao-item" data-idx="${idx}">
+                                <img class="publicacao-imagem" src="${pub.imagem}" alt="${pub.titulo}"
+                                     onerror="this.onerror=null; this.src='${CAMINHO_IMAGENS}publicacoes_1.png'">
+                                <div class="publicacao-body">
+                                    <div class="publicacao-titulo">${pub.titulo}</div>
+                                    <div class="publicacao-data">${pub.data}</div>
+                                    <div class="publicacao-acoes">
+                                        <span class="badge-publicado ${pub.status === 'Publicado' ? 'publicado' : 'nao-publicado'}"
+                                              data-idx="${idx}" data-action="alternar-status-publicacao"
+                                              title="Clique para alternar o status">${pub.status}</span>
+                                        <button class="btn-excluir" data-idx="${idx}" data-action="excluir-publicacao" title="Excluir publicação" aria-label="Excluir publicação">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                                                <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('');
+                        atualizarMetricasDashboardSeDisponivel();
+                    }
+
+                    renderPublicacoes();
+
+                    // Alterna o status da publicação ao clicar no badge (instantâneo, sem recarregar a página).
+                    // Atualiza o elemento existente (em vez de re-renderizar a lista) para que a
+                    // transição de cor definida em .badge-publicado anime suavemente entre os estados.
+                    document.getElementById('publicacoes-lista').addEventListener('click', (e) => {
+                        const alvo = e.target.closest('[data-action]');
+
+                        if (!alvo) {
+                            // Clique em qualquer outra área do card (fora do status/lixeira) abre os detalhes
+                            if (e.target.closest('.publicacao-acoes')) return;
+                            const card = e.target.closest('.publicacao-item');
+                            if (card) abrirModalDetalhesPublicacao(Number(card.dataset.idx));
+                            return;
+                        }
+
+                        if (alvo.dataset.action === 'alternar-status-publicacao') {
+                            const idx = Number(alvo.dataset.idx);
+                            const novoStatus = publicacoes[idx].status === 'Publicado' ? 'Não Publicado' : 'Publicado';
+                            publicacoes[idx].status = novoStatus;
+
+                            alvo.textContent = novoStatus;
+                            alvo.classList.toggle('publicado', novoStatus === 'Publicado');
+                            alvo.classList.toggle('nao-publicado', novoStatus === 'Não Publicado');
+
+                            mostrarToast(novoStatus === 'Publicado'
+                                ? 'Publicação marcada como Publicada.'
+                                : 'Publicação marcada como Não Publicada.');
+                        } else if (alvo.dataset.action === 'excluir-publicacao') {
+                            const idx = Number(alvo.dataset.idx);
+                            abrirConfirmacaoExclusao(
+                                'Excluir Publicação',
+                                'Tem certeza que deseja excluir esta publicação?<br><br>Esta ação removerá permanentemente o item do portfólio.',
+                                () => {
+                                    publicacoes.splice(idx, 1);
+                                    renderPublicacoes();
+                                    mostrarToast('Publicação excluída com sucesso.');
+                                }
+                            );
+                        }
+                    });
+                </script>
+            </div><!-- /.content -->
+        </main>
+    </div>
+
+    <!-- ===== MODAL: NOVO AGENDAMENTO ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-agendamento" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitulo">Novo Agendamento</h2>
+                    <p class="modal-subtitulo">Preencha as informações para cadastrar um novo agendamento.</p>
+                </div>
+                <button type="button" class="modal-fechar" id="modalFechar" aria-label="Fechar">&times;</button>
+            </div>
+
+            <form class="modal-form" id="formAgendamento">
+                <div class="form-linha">
+                    <div class="form-grupo">
+                        <label for="campoData">Data *</label>
+                        <input type="date" id="campoData" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="campoHora">Hora *</label>
+                        <input type="time" id="campoHora" required>
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoTipoServico">Tipo de serviço *</label>
+                    <select id="campoTipoServico" required>
+                        <option value="" disabled selected>Selecione o tipo de serviço</option>
+                        <option>Pintura interna</option>
+                        <option>Pintura externa</option>
+                        <option>Pintura de portas</option>
+                        <option>Pintura de janelas</option>
+                        <option>Pintura de portões</option>
+                        <option>Pintura de calhas e rufos</option>
+                        <option>Cimento queimado</option>
+                        <option>Grafiato</option>
+                        <option>Textura</option>
+                        <option>Reparo elétrico</option>
+                        <option>Reparo hidráulico</option>
+                        <option>Troca de piso</option>
+                        <option>Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoDescricao">Descrição *</label>
+                    <textarea id="campoDescricao" maxlength="500" placeholder="Descreva os detalhes do serviço..." required></textarea>
+                    <span class="contador-caracteres" id="contadorDescricao">0/500</span>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoEndereco">Endereço *</label>
+                    <input type="text" id="campoEndereco" placeholder="Rua, número, bairro, cidade e estado" required>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-cancelar" id="btnCancelarAgendamento">Cancelar</button>
+                <button type="button" class="btn-modal-salvar" id="btnSalvarAgendamento">Salvar Agendamento</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: NOVA PUBLICAÇÃO ===== -->
+    <div class="modal-overlay" id="modalPublicacaoOverlay">
+        <div class="modal-agendamento" role="dialog" aria-modal="true" aria-labelledby="modalPublicacaoTitulo">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalPublicacaoTitulo">Nova Publicação</h2>
+                    <p class="modal-subtitulo">Adicione uma nova publicação ao portfólio de serviços.</p>
+                </div>
+                <button type="button" class="modal-fechar" id="modalPublicacaoFechar" aria-label="Fechar">&times;</button>
+            </div>
+
+            <form class="modal-form" id="formPublicacao">
+                <div class="form-linha">
+                    <div class="form-grupo">
+                        <label for="campoImagem">Imagem da publicação *</label>
+                        <label class="upload-area" id="uploadArea" for="campoImagem">
+                            <svg class="upload-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 16l-4-4-4 4"></path>
+                                <path d="M12 12v9"></path>
+                                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                            </svg>
+                            <span class="upload-texto-principal">Clique para selecionar ou arraste a imagem aqui</span>
+                            <span class="upload-texto-secundario">Formatos: JPG, PNG ou WEBP<br>Tamanho máximo: 5MB</span>
+                        </label>
+                        <input type="file" id="campoImagem" accept=".jpg,.jpeg,.png,.webp" hidden>
+                        <span class="erro-campo" id="erroImagem"></span>
+                    </div>
+
+                    <div class="form-grupo">
+                        <label>Pré-visualização</label>
+                        <div class="upload-preview" id="uploadPreview">
+                            <span class="upload-preview-vazio">A pré-visualização aparecerá aqui</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoTituloPublicacao">Título da publicação *</label>
+                    <input type="text" id="campoTituloPublicacao" placeholder="Pintura externa residencial" required>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoCategoriaServico">Categoria do serviço *</label>
+                    <select id="campoCategoriaServico" required>
+                        <option value="" disabled selected>Selecione a categoria do serviço</option>
+                        <option>Pintura interna</option>
+                        <option>Pintura externa</option>
+                        <option>Pintura de portas</option>
+                        <option>Pintura de janelas</option>
+                        <option>Pintura de portões</option>
+                        <option>Pintura de calhas e rufos</option>
+                        <option>Cimento queimado</option>
+                        <option>Grafiato</option>
+                        <option>Textura</option>
+                        <option>Reparo elétrico</option>
+                        <option>Reparo hidráulico</option>
+                        <option>Troca de piso</option>
+                        <option>Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="campoDescricaoPublicacao">Descrição *</label>
+                    <textarea id="campoDescricaoPublicacao" maxlength="1000" placeholder="Descreva o serviço realizado, materiais utilizados, resultado obtido e demais detalhes relevantes." required></textarea>
+                    <span class="contador-caracteres" id="contadorDescricaoPublicacao">0/1000</span>
+                </div>
+
+                <div class="form-linha">
+                    <div class="form-grupo">
+                        <label for="campoDataExecucao">Data da execução *</label>
+                        <input type="date" id="campoDataExecucao" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="campoStatusPublicacao">Status da publicação *</label>
+                        <select id="campoStatusPublicacao" required>
+                            <option value="Publicado">Publicado</option>
+                            <option value="Não Publicado">Não Publicado</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-cancelar" id="btnCancelarPublicacao">Cancelar</button>
+                <button type="button" class="btn-modal-salvar" id="btnPublicarPublicacao">Publicar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: DETALHES DO AGENDAMENTO ===== -->
+    <div class="modal-overlay" id="modalDetalhesOverlay">
+        <div class="modal-agendamento" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesTitulo">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalDetalhesTitulo">Detalhes do Agendamento</h2>
+                    <p class="modal-subtitulo">Visualize e edite as informações deste agendamento.</p>
+                </div>
+                <button type="button" class="modal-fechar" id="modalDetalhesFechar" aria-label="Fechar">&times;</button>
+            </div>
+
+            <form class="modal-form" id="formDetalhesAgendamento">
+                <h3 class="modal-secao-titulo">Informações do Cliente</h3>
+                <div class="form-linha">
+                    <div class="form-grupo">
+                        <label for="detalheCliente">Nome do Cliente</label>
+                        <input type="text" id="detalheCliente" placeholder="Nome do cliente">
+                    </div>
+                    <div class="form-grupo">
+                        <label for="detalheTelefone">Telefone</label>
+                        <input type="text" id="detalheTelefone" placeholder="(00) 00000-0000">
+                    </div>
+                </div>
+
+                <h3 class="modal-secao-titulo">Informações do Serviço</h3>
+                <div class="form-linha-3">
+                    <div class="form-grupo">
+                        <label for="detalheTipoServico">Tipo de serviço</label>
+                        <select id="detalheTipoServico">
+                            <option>Pintura interna</option>
+                            <option>Pintura externa</option>
+                            <option>Pintura de portas</option>
+                            <option>Pintura de janelas</option>
+                            <option>Pintura de portões</option>
+                            <option>Pintura de calhas e rufos</option>
+                            <option>Cimento queimado</option>
+                            <option>Grafiato</option>
+                            <option>Textura</option>
+                            <option>Reparo elétrico</option>
+                            <option>Reparo hidráulico</option>
+                            <option>Troca de piso</option>
+                            <option>Outro</option>
+                        </select>
+                    </div>
+                    <div class="form-grupo">
+                        <label for="detalheData">Data</label>
+                        <input type="date" id="detalheData">
+                    </div>
+                    <div class="form-grupo">
+                        <label for="detalheHora">Horário</label>
+                        <input type="time" id="detalheHora">
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="detalheEndereco">Endereço</label>
+                    <input type="text" id="detalheEndereco" placeholder="Rua, número, bairro, cidade e estado">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="detalheDescricao">Descrição</label>
+                    <textarea id="detalheDescricao" maxlength="500" placeholder="Descreva os detalhes do serviço..."></textarea>
+                    <span class="contador-caracteres" id="contadorDetalheDescricao">0/500</span>
+                </div>
+
+                <h3 class="modal-secao-titulo">Status do Agendamento</h3>
+                <div class="form-grupo">
+                    <label>Status</label>
+                    <div class="status-dropdown status-dropdown-modal" id="detalheStatusDropdown">
+                        <button type="button" class="status-badge-btn" id="detalheStatusBtn"></button>
+                        <div class="status-menu" id="detalheStatusMenu"></div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-cancelar" id="btnCancelarDetalhes">Cancelar</button>
+                <button type="button" class="btn-modal-salvar" id="btnSalvarDetalhes">Salvar Alterações</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: DETALHES DA PUBLICAÇÃO ===== -->
+    <div class="modal-overlay" id="modalDetalhesPublicacaoOverlay">
+        <div class="modal-agendamento" role="dialog" aria-modal="true" aria-labelledby="modalDetalhesPublicacaoTitulo">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalDetalhesPublicacaoTitulo">Detalhes da Publicação</h2>
+                    <p class="modal-subtitulo">Visualize e edite as informações desta publicação.</p>
+                </div>
+                <button type="button" class="modal-fechar" id="modalDetalhesPublicacaoFechar" aria-label="Fechar">&times;</button>
+            </div>
+
+            <form class="modal-form" id="formDetalhesPublicacao">
+                <div class="form-grupo">
+                    <label>Imagem da Publicação</label>
+                    <div class="form-linha">
+                        <div class="upload-preview" id="detalheImagemAtualPreview">
+                            <img id="detalheImagemAtualImg" alt="Imagem atual da publicação">
+                        </div>
+                        <label class="upload-area" id="detalheUploadAreaPublicacao" for="detalheCampoImagemPublicacao">
+                            <svg class="upload-icone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 16l-4-4-4 4"></path>
+                                <path d="M12 12v9"></path>
+                                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"></path>
+                            </svg>
+                            <span class="upload-texto-principal">Trocar imagem</span>
+                            <span class="upload-texto-secundario">Arraste ou clique para enviar<br>PNG, JPG ou WEBP. Máx. 5MB</span>
+                        </label>
+                        <input type="file" id="detalheCampoImagemPublicacao" accept=".jpg,.jpeg,.png,.webp" hidden>
+                    </div>
+                    <span class="erro-campo" id="detalheErroImagemPublicacao"></span>
+                    <button type="button" class="btn-visualizar-imagem" id="btnVisualizarImagemPublicacao">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+                            <circle cx="12" cy="12" r="3"></circle>
+                        </svg>
+                        Visualizar imagem
+                    </button>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="detalheTituloPublicacao">Título da Publicação</label>
+                    <input type="text" id="detalheTituloPublicacao">
+                </div>
+
+                <div class="form-grupo">
+                    <label for="detalheCategoriaServico">Categoria do Serviço</label>
+                    <select id="detalheCategoriaServico">
+                        <option>Pintura interna</option>
+                        <option>Pintura externa</option>
+                        <option>Pintura de portas</option>
+                        <option>Pintura de janelas</option>
+                        <option>Pintura de portões</option>
+                        <option>Pintura de calhas e rufos</option>
+                        <option>Cimento queimado</option>
+                        <option>Grafiato</option>
+                        <option>Textura</option>
+                        <option>Reparo elétrico</option>
+                        <option>Reparo hidráulico</option>
+                        <option>Troca de piso</option>
+                        <option>Outro</option>
+                    </select>
+                </div>
+
+                <div class="form-grupo">
+                    <label for="detalheDescricaoPublicacao">Descrição</label>
+                    <textarea id="detalheDescricaoPublicacao" maxlength="1000" placeholder="Descreva o serviço realizado, materiais utilizados, resultado obtido e demais detalhes relevantes."></textarea>
+                    <span class="contador-caracteres" id="contadorDetalheDescricaoPublicacao">0/1000</span>
+                </div>
+
+                <div class="form-linha">
+                    <div class="form-grupo">
+                        <label for="detalheDataExecucao">Data da Execução</label>
+                        <input type="date" id="detalheDataExecucao">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Status da Publicação</label>
+                        <div class="status-dropdown status-dropdown-modal" id="detalhePublicacaoStatusDropdown">
+                            <button type="button" class="badge-publicado" id="detalhePublicacaoStatusBtn"></button>
+                            <div class="status-menu" id="detalhePublicacaoStatusMenu"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <div class="modal-footer modal-footer-split">
+                <button type="button" class="btn-modal-excluir-secundario" id="btnExcluirDetalhesPublicacao">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="3 6 5 6 21 6"></polyline>
+                        <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path>
+                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
+                        <line x1="10" y1="11" x2="10" y2="17"></line>
+                        <line x1="14" y1="11" x2="14" y2="17"></line>
+                    </svg>
+                    Excluir Publicação
+                </button>
+                <div class="modal-footer-acoes">
+                    <button type="button" class="btn-modal-cancelar" id="btnCancelarDetalhesPublicacao">Cancelar</button>
+                    <button type="button" class="btn-modal-salvar" id="btnSalvarDetalhesPublicacao">Salvar Alterações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: CONFIRMAR EXCLUSÃO (reutilizável) ===== -->
+    <div class="modal-overlay" id="modalConfirmacaoOverlay">
+        <div class="modal-confirmacao" role="dialog" aria-modal="true" aria-labelledby="modalConfirmacaoTitulo">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalConfirmacaoTitulo">Excluir item</h2>
+                </div>
+                <button type="button" class="modal-fechar" id="modalConfirmacaoFechar" aria-label="Fechar">&times;</button>
+            </div>
+
+            <div class="modal-confirmacao-corpo" id="modalConfirmacaoMensagem"></div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-modal-cancelar" id="btnConfirmacaoCancelar">Cancelar</button>
+                <button type="button" class="btn-modal-excluir" id="btnConfirmacaoExcluir">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-sucesso" id="toastSucesso">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+        </svg>
+        <span id="toastSucessoTexto"></span>
+    </div>
+
+    <script>
+        // Função utilitária usada pelos links "Ver todos".
+        // Por agora apenas regista no console — depois pode ligar-se à navegação ou a um pedido AJAX.
+        function sendPrompt(texto) {
+            console.log('Navegar para:', texto);
+        }
+
+        // ===== TOAST DE CONFIRMAÇÃO (discreto) =====
+        const toastSucesso = document.getElementById('toastSucesso');
+        let toastTimeout;
+
+        function mostrarToast(mensagem) {
+            document.getElementById('toastSucessoTexto').textContent = mensagem;
+            toastSucesso.classList.add('visivel');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => toastSucesso.classList.remove('visivel'), 3000);
+        }
+
+        // ===== MODAL DE CONFIRMAÇÃO DE EXCLUSÃO (reutilizável em todo o painel) =====
+        const modalConfirmacaoOverlay = document.getElementById('modalConfirmacaoOverlay');
+        const modalConfirmacaoTitulo = document.getElementById('modalConfirmacaoTitulo');
+        const modalConfirmacaoMensagem = document.getElementById('modalConfirmacaoMensagem');
+
+        let aoConfirmarExclusao = null;
+
+        // titulo: texto do cabeçalho do modal.
+        // mensagem: HTML do corpo (aceita <br> para quebras de linha).
+        // aoConfirmar: callback executado apenas se o usuário confirmar a exclusão.
+        function abrirConfirmacaoExclusao(titulo, mensagem, aoConfirmar) {
+            modalConfirmacaoTitulo.textContent = titulo;
+            modalConfirmacaoMensagem.innerHTML = mensagem;
+            aoConfirmarExclusao = aoConfirmar;
+            modalConfirmacaoOverlay.classList.add('ativo');
+        }
+
+        function fecharConfirmacaoExclusao() {
+            modalConfirmacaoOverlay.classList.remove('ativo');
+            aoConfirmarExclusao = null;
+        }
+
+        document.getElementById('modalConfirmacaoFechar').addEventListener('click', fecharConfirmacaoExclusao);
+        document.getElementById('btnConfirmacaoCancelar').addEventListener('click', fecharConfirmacaoExclusao);
+        document.getElementById('btnConfirmacaoExcluir').addEventListener('click', () => {
+            const callback = aoConfirmarExclusao;
+            fecharConfirmacaoExclusao();
+            if (callback) callback();
+        });
+
+        modalConfirmacaoOverlay.addEventListener('click', (e) => {
+            if (e.target === modalConfirmacaoOverlay) fecharConfirmacaoExclusao();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalConfirmacaoOverlay.classList.contains('ativo')) fecharConfirmacaoExclusao();
+        });
+
+        // ===== MODAL: NOVO AGENDAMENTO =====
+        const modalOverlay = document.getElementById('modalOverlay');
+        const formAgendamento = document.getElementById('formAgendamento');
+        const campoDescricao = document.getElementById('campoDescricao');
+        const contadorDescricao = document.getElementById('contadorDescricao');
+
+        function abrirModalAgendamento() {
+            formAgendamento.reset();
+            contadorDescricao.textContent = '0/500';
+            modalOverlay.classList.add('ativo');
+        }
+
+        function fecharModalAgendamento() {
+            modalOverlay.classList.remove('ativo');
+        }
+
+        document.getElementById('modalFechar').addEventListener('click', fecharModalAgendamento);
+        document.getElementById('btnCancelarAgendamento').addEventListener('click', fecharModalAgendamento);
+
+        // Fecha ao clicar fora do modal (no overlay escurecido)
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) fecharModalAgendamento();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalOverlay.classList.contains('ativo')) fecharModalAgendamento();
+        });
+
+        campoDescricao.addEventListener('input', () => {
+            contadorDescricao.textContent = `${campoDescricao.value.length}/500`;
+        });
+
+        document.getElementById('btnSalvarAgendamento').addEventListener('click', () => {
+            if (!formAgendamento.checkValidity()) {
+                formAgendamento.reportValidity();
+                return;
+            }
+
+            const [ano, mes, dia] = document.getElementById('campoData').value.split('-').map(Number);
+            const dataSelecionada = new Date(ano, mes - 1, dia);
+
+            agendamentos.unshift({
+                dia,
+                mes: MESES_ABREV[mes - 1],
+                ano,
+                diaSemana: DIAS_SEMANA[dataSelecionada.getDay()],
+                hora: document.getElementById('campoHora').value,
+                titulo: document.getElementById('campoTipoServico').value,
+                endereco: document.getElementById('campoEndereco').value.trim(),
+                descricao: campoDescricao.value.trim(),
+                cliente: '',
+                telefone: '',
+                status: 'Agendado'
+            });
+
+            renderAgendamentos();
+            renderCalendario();
+            fecharModalAgendamento();
+        });
+
+        // ===== MODAL: DETALHES / EDIÇÃO RÁPIDA DE AGENDAMENTO =====
+        const modalDetalhesOverlay = document.getElementById('modalDetalhesOverlay');
+        const formDetalhesAgendamento = document.getElementById('formDetalhesAgendamento');
+        const detalheDescricao = document.getElementById('detalheDescricao');
+        const contadorDetalheDescricao = document.getElementById('contadorDetalheDescricao');
+        const detalheStatusBtn = document.getElementById('detalheStatusBtn');
+        const detalheStatusMenu = document.getElementById('detalheStatusMenu');
+
+        const STATUS_OPCOES_DETALHE = ['Agendado', 'Concluído', 'Cancelado'];
+        detalheStatusMenu.innerHTML = `
+            <div class="status-menu-titulo">Alterar status</div>
+            ${STATUS_OPCOES_DETALHE.map(opcao => `
+                <button type="button" class="status-menu-item" data-action="selecionar-status-detalhe" data-status="${opcao}">
+                    <span class="status-dot ${statusClasse(opcao)}"></span>${opcao}
+                </button>
+            `).join('')}
+        `;
+
+        let idxAgendamentoEmEdicao = null;
+        let statusSelecionadoDetalhe = 'Agendado';
+
+        function definirStatusDetalhe(status) {
+            statusSelecionadoDetalhe = status;
+            detalheStatusBtn.className = `status-badge-btn ${statusClasse(status)}`;
+            detalheStatusBtn.innerHTML = `${status}<svg class="status-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+        }
+
+        function dataAgendamentoParaInput(a) {
+            const mesNum = MESES_ABREV.indexOf(a.mes) + 1;
+            return `${a.ano}-${String(mesNum).padStart(2, '0')}-${String(a.dia).padStart(2, '0')}`;
+        }
+
+        function abrirModalDetalhesAgendamento(idx) {
+            const a = agendamentos[idx];
+            idxAgendamentoEmEdicao = idx;
+
+            document.getElementById('detalheCliente').value = a.cliente || '';
+            document.getElementById('detalheTelefone').value = a.telefone || '';
+            document.getElementById('detalheTipoServico').value = a.titulo;
+            document.getElementById('detalheData').value = dataAgendamentoParaInput(a);
+            document.getElementById('detalheHora').value = a.hora;
+            document.getElementById('detalheEndereco').value = a.endereco;
+            detalheDescricao.value = a.descricao || '';
+            contadorDetalheDescricao.textContent = `${detalheDescricao.value.length}/500`;
+            definirStatusDetalhe(a.status);
+            detalheStatusMenu.classList.remove('aberto');
+            detalheStatusBtn.classList.remove('aberto');
+
+            modalDetalhesOverlay.classList.add('ativo');
+        }
+
+        function fecharModalDetalhesAgendamento() {
+            modalDetalhesOverlay.classList.remove('ativo');
+            idxAgendamentoEmEdicao = null;
+        }
+
+        document.getElementById('modalDetalhesFechar').addEventListener('click', fecharModalDetalhesAgendamento);
+        document.getElementById('btnCancelarDetalhes').addEventListener('click', fecharModalDetalhesAgendamento);
+
+        modalDetalhesOverlay.addEventListener('click', (e) => {
+            if (e.target === modalDetalhesOverlay) fecharModalDetalhesAgendamento();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalDetalhesOverlay.classList.contains('ativo')) fecharModalDetalhesAgendamento();
+        });
+
+        detalheDescricao.addEventListener('input', () => {
+            contadorDetalheDescricao.textContent = `${detalheDescricao.value.length}/500`;
+        });
+
+        detalheStatusBtn.addEventListener('click', () => {
+            const jaAberto = detalheStatusMenu.classList.contains('aberto');
+            detalheStatusMenu.classList.toggle('aberto', !jaAberto);
+            detalheStatusBtn.classList.toggle('aberto', !jaAberto);
+        });
+
+        detalheStatusMenu.addEventListener('click', (e) => {
+            const item = e.target.closest('[data-action="selecionar-status-detalhe"]');
+            if (!item) return;
+            definirStatusDetalhe(item.dataset.status);
+            detalheStatusMenu.classList.remove('aberto');
+            detalheStatusBtn.classList.remove('aberto');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#detalheStatusDropdown')) {
+                detalheStatusMenu.classList.remove('aberto');
+                detalheStatusBtn.classList.remove('aberto');
+            }
+        });
+
+        document.getElementById('btnSalvarDetalhes').addEventListener('click', () => {
+            if (idxAgendamentoEmEdicao === null) return;
+
+            const valorData = document.getElementById('detalheData').value;
+            if (!valorData) {
+                document.getElementById('detalheData').reportValidity();
+                return;
+            }
+
+            const [ano, mes, dia] = valorData.split('-').map(Number);
+            const dataSelecionada = new Date(ano, mes - 1, dia);
+
+            agendamentos[idxAgendamentoEmEdicao] = {
+                ...agendamentos[idxAgendamentoEmEdicao],
+                cliente: document.getElementById('detalheCliente').value.trim(),
+                telefone: document.getElementById('detalheTelefone').value.trim(),
+                titulo: document.getElementById('detalheTipoServico').value,
+                dia,
+                mes: MESES_ABREV[mes - 1],
+                ano,
+                diaSemana: DIAS_SEMANA[dataSelecionada.getDay()],
+                hora: document.getElementById('detalheHora').value,
+                endereco: document.getElementById('detalheEndereco').value.trim(),
+                descricao: detalheDescricao.value.trim(),
+                status: statusSelecionadoDetalhe
+            };
+
+            renderAgendamentos();
+            renderCalendario();
+            fecharModalDetalhesAgendamento();
+            mostrarToast('Agendamento atualizado com sucesso.');
+        });
+
+        // ===== MODAL: NOVA PUBLICAÇÃO =====
+        const FORMATOS_IMAGEM_ACEITOS = ['image/jpeg', 'image/png', 'image/webp'];
+        const TAMANHO_MAXIMO_IMAGEM = 5 * 1024 * 1024; // 5MB
+
+        const modalPublicacaoOverlay = document.getElementById('modalPublicacaoOverlay');
+        const formPublicacao = document.getElementById('formPublicacao');
+        const campoImagem = document.getElementById('campoImagem');
+        const uploadArea = document.getElementById('uploadArea');
+        const uploadPreview = document.getElementById('uploadPreview');
+        const erroImagem = document.getElementById('erroImagem');
+        const campoDescricaoPublicacao = document.getElementById('campoDescricaoPublicacao');
+        const contadorDescricaoPublicacao = document.getElementById('contadorDescricaoPublicacao');
+
+        let imagemSelecionada = null;
+
+        function abrirModalPublicacao() {
+            formPublicacao.reset();
+            imagemSelecionada = null;
+            contadorDescricaoPublicacao.textContent = '0/1000';
+            uploadPreview.innerHTML = '<span class="upload-preview-vazio">A pré-visualização aparecerá aqui</span>';
+            uploadArea.classList.remove('erro');
+            erroImagem.textContent = '';
+            modalPublicacaoOverlay.classList.add('ativo');
+        }
+
+        function fecharModalPublicacao() {
+            modalPublicacaoOverlay.classList.remove('ativo');
+        }
+
+        document.getElementById('modalPublicacaoFechar').addEventListener('click', fecharModalPublicacao);
+        document.getElementById('btnCancelarPublicacao').addEventListener('click', fecharModalPublicacao);
+
+        modalPublicacaoOverlay.addEventListener('click', (e) => {
+            if (e.target === modalPublicacaoOverlay) fecharModalPublicacao();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalPublicacaoOverlay.classList.contains('ativo')) fecharModalPublicacao();
+        });
+
+        campoDescricaoPublicacao.addEventListener('input', () => {
+            contadorDescricaoPublicacao.textContent = `${campoDescricaoPublicacao.value.length}/1000`;
+        });
+
+        // Validação reutilizada pelos uploads de imagem (Nova Publicação e Detalhes da Publicação)
+        function validarArquivoImagem(arquivo) {
+            if (!FORMATOS_IMAGEM_ACEITOS.includes(arquivo.type)) {
+                return 'Formato inválido. Envie uma imagem JPG, PNG ou WEBP.';
+            }
+            if (arquivo.size > TAMANHO_MAXIMO_IMAGEM) {
+                return 'A imagem excede o tamanho máximo de 5MB.';
+            }
+            return null;
+        }
+
+        function processarArquivoImagem(arquivo) {
+            if (!arquivo) return;
+
+            const erro = validarArquivoImagem(arquivo);
+            if (erro) {
+                erroImagem.textContent = erro;
+                uploadArea.classList.add('erro');
+                return;
+            }
+
+            erroImagem.textContent = '';
+            uploadArea.classList.remove('erro');
+            imagemSelecionada = arquivo;
+
+            const urlPreview = URL.createObjectURL(arquivo);
+            uploadPreview.innerHTML = `
+                <img src="${urlPreview}" alt="Pré-visualização da publicação">
+                <button type="button" class="upload-preview-remover" id="btnRemoverImagem" aria-label="Remover imagem">&times;</button>
+            `;
+            document.getElementById('btnRemoverImagem').addEventListener('click', (e) => {
+                e.preventDefault();
+                imagemSelecionada = null;
+                campoImagem.value = '';
+                uploadPreview.innerHTML = '<span class="upload-preview-vazio">A pré-visualização aparecerá aqui</span>';
+            });
+        }
+
+        campoImagem.addEventListener('change', () => processarArquivoImagem(campoImagem.files[0]));
+
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('arrastando');
+        });
+        uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('arrastando'));
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('arrastando');
+            processarArquivoImagem(e.dataTransfer.files[0]);
+        });
+
+        document.getElementById('btnPublicarPublicacao').addEventListener('click', () => {
+            let valido = true;
+
+            if (!imagemSelecionada) {
+                erroImagem.textContent = 'Selecione uma imagem para a publicação.';
+                uploadArea.classList.add('erro');
+                valido = false;
+            }
+
+            if (!formPublicacao.checkValidity()) {
+                formPublicacao.reportValidity();
+                valido = false;
+            }
+
+            if (!valido) return;
+
+            const [ano, mes, dia] = document.getElementById('campoDataExecucao').value.split('-');
+
+            publicacoes.unshift({
+                titulo: document.getElementById('campoTituloPublicacao').value.trim(),
+                categoria: document.getElementById('campoCategoriaServico').value,
+                descricao: campoDescricaoPublicacao.value.trim(),
+                data: `${dia}/${mes}/${ano}`,
+                status: document.getElementById('campoStatusPublicacao').value,
+                imagem: URL.createObjectURL(imagemSelecionada)
+            });
+
+            renderPublicacoes();
+            fecharModalPublicacao();
+        });
+
+        // ===== MODAL: DETALHES / EDIÇÃO RÁPIDA DE PUBLICAÇÃO =====
+        const modalDetalhesPublicacaoOverlay = document.getElementById('modalDetalhesPublicacaoOverlay');
+        const detalheImagemAtualImg = document.getElementById('detalheImagemAtualImg');
+        const detalheUploadAreaPublicacao = document.getElementById('detalheUploadAreaPublicacao');
+        const detalheCampoImagemPublicacao = document.getElementById('detalheCampoImagemPublicacao');
+        const detalheErroImagemPublicacao = document.getElementById('detalheErroImagemPublicacao');
+        const detalheDescricaoPublicacao = document.getElementById('detalheDescricaoPublicacao');
+        const contadorDetalheDescricaoPublicacao = document.getElementById('contadorDetalheDescricaoPublicacao');
+        const detalhePublicacaoStatusBtn = document.getElementById('detalhePublicacaoStatusBtn');
+        const detalhePublicacaoStatusMenu = document.getElementById('detalhePublicacaoStatusMenu');
+
+        detalhePublicacaoStatusMenu.innerHTML = `
+            <div class="status-menu-titulo">Alterar status</div>
+            <button type="button" class="status-menu-item" data-action="selecionar-status-publicacao-detalhe" data-status="Publicado">
+                <span class="status-dot concluido"></span>Publicado
+            </button>
+            <button type="button" class="status-menu-item" data-action="selecionar-status-publicacao-detalhe" data-status="Não Publicado">
+                <span class="status-dot indisponivel"></span>Não Publicado
+            </button>
+        `;
+
+        let idxPublicacaoEmEdicao = null;
+        let statusSelecionadoDetalhePublicacao = 'Publicado';
+        let imagemSubstitutaPublicacao = null;
+
+        function definirStatusDetalhePublicacao(status) {
+            statusSelecionadoDetalhePublicacao = status;
+            detalhePublicacaoStatusBtn.className = `badge-publicado ${status === 'Publicado' ? 'publicado' : 'nao-publicado'}`;
+            detalhePublicacaoStatusBtn.innerHTML = `${status}<svg class="status-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+        }
+
+        function dataPublicacaoParaInput(pub) {
+            const [dia, mes, ano] = pub.data.split('/');
+            return `${ano}-${mes}-${dia}`;
+        }
+
+        function abrirModalDetalhesPublicacao(idx) {
+            const pub = publicacoes[idx];
+            idxPublicacaoEmEdicao = idx;
+            imagemSubstitutaPublicacao = null;
+
+            detalheImagemAtualImg.src = pub.imagem;
+            detalheUploadAreaPublicacao.classList.remove('erro');
+            detalheErroImagemPublicacao.textContent = '';
+            detalheCampoImagemPublicacao.value = '';
+
+            document.getElementById('detalheTituloPublicacao').value = pub.titulo;
+            document.getElementById('detalheCategoriaServico').value = pub.categoria || pub.titulo;
+            detalheDescricaoPublicacao.value = pub.descricao || '';
+            contadorDetalheDescricaoPublicacao.textContent = `${detalheDescricaoPublicacao.value.length}/1000`;
+            document.getElementById('detalheDataExecucao').value = dataPublicacaoParaInput(pub);
+            definirStatusDetalhePublicacao(pub.status);
+            detalhePublicacaoStatusMenu.classList.remove('aberto');
+            detalhePublicacaoStatusBtn.classList.remove('aberto');
+
+            modalDetalhesPublicacaoOverlay.classList.add('ativo');
+        }
+
+        function fecharModalDetalhesPublicacao() {
+            modalDetalhesPublicacaoOverlay.classList.remove('ativo');
+            idxPublicacaoEmEdicao = null;
+        }
+
+        document.getElementById('modalDetalhesPublicacaoFechar').addEventListener('click', fecharModalDetalhesPublicacao);
+        document.getElementById('btnCancelarDetalhesPublicacao').addEventListener('click', fecharModalDetalhesPublicacao);
+
+        modalDetalhesPublicacaoOverlay.addEventListener('click', (e) => {
+            if (e.target === modalDetalhesPublicacaoOverlay) fecharModalDetalhesPublicacao();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modalDetalhesPublicacaoOverlay.classList.contains('ativo')) fecharModalDetalhesPublicacao();
+        });
+
+        detalheDescricaoPublicacao.addEventListener('input', () => {
+            contadorDetalheDescricaoPublicacao.textContent = `${detalheDescricaoPublicacao.value.length}/1000`;
+        });
+
+        function processarArquivoImagemDetalhe(arquivo) {
+            if (!arquivo) return;
+
+            const erro = validarArquivoImagem(arquivo);
+            if (erro) {
+                detalheErroImagemPublicacao.textContent = erro;
+                detalheUploadAreaPublicacao.classList.add('erro');
+                return;
+            }
+
+            detalheErroImagemPublicacao.textContent = '';
+            detalheUploadAreaPublicacao.classList.remove('erro');
+            imagemSubstitutaPublicacao = arquivo;
+            detalheImagemAtualImg.src = URL.createObjectURL(arquivo);
+        }
+
+        detalheCampoImagemPublicacao.addEventListener('change', () => processarArquivoImagemDetalhe(detalheCampoImagemPublicacao.files[0]));
+
+        detalheUploadAreaPublicacao.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            detalheUploadAreaPublicacao.classList.add('arrastando');
+        });
+        detalheUploadAreaPublicacao.addEventListener('dragleave', () => detalheUploadAreaPublicacao.classList.remove('arrastando'));
+        detalheUploadAreaPublicacao.addEventListener('drop', (e) => {
+            e.preventDefault();
+            detalheUploadAreaPublicacao.classList.remove('arrastando');
+            processarArquivoImagemDetalhe(e.dataTransfer.files[0]);
+        });
+
+        document.getElementById('btnVisualizarImagemPublicacao').addEventListener('click', () => {
+            if (detalheImagemAtualImg.src) window.open(detalheImagemAtualImg.src, '_blank');
+        });
+
+        detalhePublicacaoStatusBtn.addEventListener('click', () => {
+            const jaAberto = detalhePublicacaoStatusMenu.classList.contains('aberto');
+            detalhePublicacaoStatusMenu.classList.toggle('aberto', !jaAberto);
+            detalhePublicacaoStatusBtn.classList.toggle('aberto', !jaAberto);
+        });
+
+        detalhePublicacaoStatusMenu.addEventListener('click', (e) => {
+            const item = e.target.closest('[data-action="selecionar-status-publicacao-detalhe"]');
+            if (!item) return;
+            definirStatusDetalhePublicacao(item.dataset.status);
+            detalhePublicacaoStatusMenu.classList.remove('aberto');
+            detalhePublicacaoStatusBtn.classList.remove('aberto');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#detalhePublicacaoStatusDropdown')) {
+                detalhePublicacaoStatusMenu.classList.remove('aberto');
+                detalhePublicacaoStatusBtn.classList.remove('aberto');
+            }
+        });
+
+        document.getElementById('btnExcluirDetalhesPublicacao').addEventListener('click', () => {
+            if (idxPublicacaoEmEdicao === null) return;
+            const idx = idxPublicacaoEmEdicao;
+            fecharModalDetalhesPublicacao();
+            abrirConfirmacaoExclusao(
+                'Excluir Publicação',
+                'Tem certeza que deseja excluir esta publicação?<br><br>Esta ação removerá permanentemente o item do portfólio.',
+                () => {
+                    publicacoes.splice(idx, 1);
+                    renderPublicacoes();
+                    mostrarToast('Publicação excluída com sucesso.');
+                }
+            );
+        });
+
+        document.getElementById('btnSalvarDetalhesPublicacao').addEventListener('click', () => {
+            if (idxPublicacaoEmEdicao === null) return;
+
+            const valorData = document.getElementById('detalheDataExecucao').value;
+            if (!valorData) {
+                document.getElementById('detalheDataExecucao').reportValidity();
+                return;
+            }
+            const [ano, mes, dia] = valorData.split('-');
+
+            publicacoes[idxPublicacaoEmEdicao] = {
+                ...publicacoes[idxPublicacaoEmEdicao],
+                titulo: document.getElementById('detalheTituloPublicacao').value.trim(),
+                categoria: document.getElementById('detalheCategoriaServico').value,
+                descricao: detalheDescricaoPublicacao.value.trim(),
+                data: `${dia}/${mes}/${ano}`,
+                status: statusSelecionadoDetalhePublicacao,
+                imagem: imagemSubstitutaPublicacao
+                    ? URL.createObjectURL(imagemSubstitutaPublicacao)
+                    : publicacoes[idxPublicacaoEmEdicao].imagem
+            };
+
+            renderPublicacoes();
+            fecharModalDetalhesPublicacao();
+            mostrarToast('Publicação atualizada com sucesso.');
+        });
+
+        // ===== MÉTRICAS DOS CARDS DO TOPO (dados reais, sem valores fixos) =====
+        // Cada métrica é calculada diretamente a partir do array que alimenta a respetiva
+        // seção (agendamentos / publicacoes / avaliacoes) — única fonte de verdade.
+        // O WhatsApp continua fixo aqui porque não existe, neste projeto, uma fonte de dados
+        // real para o nº de conversas (não há integração com WhatsApp implementada).
+        function calcularMetricasDashboard() {
+            return {
+                agendamentosSemana: contarAgendamentosDaSemana(),
+                // Total de publicações cadastradas, independentemente do status
+                // (Publicado/Não Publicado). Para contar só as publicadas, troque por:
+                // publicacoes.filter(p => p.status === 'Publicado').length
+                portfolio: publicacoes.length,
+                avaliacoes: avaliacoes.length
+            };
+        }
+
+        // Dados dos cards (contagens iniciais já calculadas a partir dos dados reais)
+        const metricasIniciais = calcularMetricasDashboard();
+        const cardsData = [
+            {
+                chave: 'agendamentosSemana',
+                count: metricasIniciais.agendamentosSemana,
+                label: 'Agendamentos\nesta semana',
+                image: '../images/icon_calendario.png'
+            },
+            {
+                chave: 'portfolio',
+                count: metricasIniciais.portfolio,
+                label: 'Portfólio',
+                image: '../images/icon_portifolio.png'
+            },
+            {
+                chave: 'avaliacoes',
+                count: metricasIniciais.avaliacoes,
+                label: 'Avaliações',
+                image: '../images/icon_avaliacao.png'
+            },
+            {
+                chave: 'whatsapp',
+                count: 1,
+                label: 'WhatsApp',
+                image: '../images/icon_wpp.png'
+            }
+        ];
+
+        // Função para gerar cards dinamicamente
+        function renderCards() {
+            const container = document.getElementById('cardsContainer');
+
+            cardsData.forEach(data => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-top">
+                        <div class="icon-circle">
+                            <img src="${data.image}" alt="Ícone" class="card-icon">
+                        </div>
+                        <div class="card-info">
+                            <p class="count" id="metrica-${data.chave}">${data.count}</p>
+                            <p class="label">${data.label}</p>
+                        </div>
+                    </div>
+                    `;
+                container.appendChild(card);
+            });
+        }
+
+        // Atualiza o número de um card com uma pequena animação de destaque,
+        // sem recriar o elemento (evita "piscar" o card inteiro a cada mudança).
+        function definirValorMetrica(chave, novoValor) {
+            const elemento = document.getElementById(`metrica-${chave}`);
+            if (!elemento || Number(elemento.textContent) === novoValor) return;
+
+            elemento.textContent = novoValor;
+            elemento.classList.remove('metrica-atualizada');
+            void elemento.offsetWidth; // força o reflow para reiniciar a animação em mudanças consecutivas
+            elemento.classList.add('metrica-atualizada');
+        }
+
+        // Função reutilizável chamada por agendamentos, publicações e avaliações
+        // sempre que os seus dados mudam (criação, edição, exclusão, alteração de status).
+        function atualizarMetricasDashboard() {
+            const metricas = calcularMetricasDashboard();
+            definirValorMetrica('agendamentosSemana', metricas.agendamentosSemana);
+            definirValorMetrica('portfolio', metricas.portfolio);
+            definirValorMetrica('avaliacoes', metricas.avaliacoes);
+        }
+
+        // Atualizar data
+        const dateElement = document.getElementById('currentDate');
+        const today = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        dateElement.textContent = today.toLocaleDateString('pt-BR', options);
+
+        // Renderizar cards quando a página carregar
+        renderCards();
+
+        // ===== ALTURAS IGUAIS NO BLOCO DO MEIO =====
+        // Mede a altura real do calendário e aplica-a aos painéis de
+        // agendamentos e avaliações (só no layout de 3 colunas).
+        // Assim os três ficam exatamente com a mesma altura e os painéis
+        // com excesso de itens ganham scroll interno (definido no CSS).
+        function sincronizarAlturas() {
+            const calendario = document.querySelector('.card-calendario');
+            const agendamentos = document.querySelector('.agendamentos-wrapper');
+            const avaliacoes = document.querySelector('.card-avaliacoes');
+            if (!calendario || !agendamentos || !avaliacoes) return;
+
+            if (window.innerWidth >= 1101) {
+                const altura = calendario.offsetHeight + 'px';
+                agendamentos.style.height = altura;
+                avaliacoes.style.height = altura;
+            } else {
+                // Em ecrãs pequenos os cards empilham: altura natural
+                agendamentos.style.height = '';
+                avaliacoes.style.height = '';
+            }
+        }
+
+        // Reage a mudanças de tamanho do calendário (troca de mês) e da janela.
+        const cardCalendario = document.querySelector('.card-calendario');
+        if (cardCalendario && 'ResizeObserver' in window) {
+            new ResizeObserver(sincronizarAlturas).observe(cardCalendario);
+        }
+        window.addEventListener('resize', sincronizarAlturas);
+        window.addEventListener('load', sincronizarAlturas);
+        sincronizarAlturas();
+    </script>
+
+</body>
+</html>

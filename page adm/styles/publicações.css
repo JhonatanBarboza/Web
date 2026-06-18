@@ -1,0 +1,252 @@
+/* ===== CARD DE PUBLICAÇÕES RECENTES ===== */
+/* Nota: este ficheiro é importado pelo dashboard.css.
+   As variáveis (:root), o reset (*) e o body já estão definidos
+   no variables.css / dashboard.css, por isso NÃO se repetem aqui. */
+
+.card-publicacoes {
+  background: var(--color-background-primary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-lg);
+  padding: 1.25rem 1.25rem 1rem;
+  width: 100%;
+}
+
+.card-publicacoes h2 {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin: 0 0 1rem;
+}
+
+/* ===== LISTA HORIZONTAL COM SCROLL ===== */
+.publicacoes-lista {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-tertiary) transparent;
+}
+
+.publicacoes-lista::-webkit-scrollbar {
+  height: 4px;
+}
+
+.publicacoes-lista::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.publicacoes-lista::-webkit-scrollbar-thumb {
+  background: var(--color-border-tertiary);
+  border-radius: 4px;
+}
+
+/* ===== ITEM DE PUBLICAÇÃO (imagem à esquerda + texto à direita) ===== */
+.publicacao-item {
+  flex-shrink: 0;
+  width: 280px;
+  height: 140px;            /* altura uniforme e mais destacada */
+  display: flex;            /* imagem e descrição lado a lado */
+  align-items: stretch;
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.publicacao-item:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Imagem de capa: ~50% da largura, preenchendo toda a altura */
+.publicacao-imagem,
+.publicacao-imagem-placeholder {
+  width: 50%;
+  height: 100%;
+  object-fit: cover;        /* preenche mantendo a proporção */
+  display: block;
+  flex-shrink: 0;
+  background: var(--color-border-tertiary);
+}
+
+/* Conteúdo textual à direita (alinhado verticalmente ao centro) */
+.publicacao-body {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.publicacao-titulo {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.publicacao-data {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 6px;
+}
+
+/* ===== AÇÕES (status + lixeira) DAS PUBLICAÇÕES ===== */
+.publicacao-acoes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Badge de status (clicável: alterna entre Publicado / Não Publicado) */
+.badge-publicado {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;   /* não estica à largura toda */
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  border: none;
+  border-radius: 20px;
+  padding: 3px 10px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.badge-publicado:hover {
+  opacity: 0.85;
+}
+
+.badge-publicado.publicado {
+  background: var(--color-aprovado);
+}
+
+.badge-publicado.nao-publicado {
+  background: var(--color-rejeitado);
+}
+
+/* ===== RODAPÉ ===== */
+.card-publicacoes .card-footer {
+  margin-top: 14px;
+  text-align: center;
+}
+
+.card-publicacoes .card-footer a {
+  font-size: 0.82rem;
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.card-publicacoes .card-footer a:hover {
+  color: var(--color-highlight);
+}
+
+/* ===== MODAL: NOVA PUBLICAÇÃO (upload + pré-visualização) ===== */
+.upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 160px;
+  padding: 16px;
+  text-align: center;
+  background: var(--color-background-primary);
+  border: 1.5px dashed var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.upload-area:hover,
+.upload-area.arrastando {
+  border-color: var(--color-highlight);
+  background: var(--color-background-secondary);
+}
+
+.upload-area.erro {
+  border-color: var(--color-danger);
+}
+
+.upload-icone {
+  width: 28px;
+  height: 28px;
+  color: var(--color-highlight);
+}
+
+.upload-texto-principal {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.upload-texto-secundario {
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  line-height: 1.4;
+}
+
+.erro-campo {
+  font-size: 12px;
+  color: var(--color-danger);
+}
+
+.upload-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+  padding: 16px;
+  text-align: center;
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.upload-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.upload-preview-vazio {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.upload-preview-remover {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--color-white);
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.upload-preview-remover:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
