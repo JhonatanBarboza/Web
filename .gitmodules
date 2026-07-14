@@ -1,0 +1,3 @@
+[submodule "projeto-base"]
+	path = projeto-base
+	url = https://github.com/ASBeatriz/Website-paintingService
